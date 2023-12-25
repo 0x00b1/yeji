@@ -2,7 +2,7 @@ author = "Allen Goodman"
 
 copyright = "2023 Genentech, Inc."
 
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = [".DS_Store", "Thumbs.db", "_build"]
 
 extensions = ["sphinx.ext.autodoc"]
 
