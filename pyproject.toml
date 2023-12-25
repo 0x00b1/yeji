@@ -3,15 +3,15 @@ requires = ["setuptools-scm>=8.0.4", "setuptools>=69.0.3", "wheel>=0.42.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-authors = [{email = "allen.goodman@icloud.com", name = "Allen Goodman"}]
+authors = [{ email = "allen.goodman@icloud.com", name = "Allen Goodman" }]
 dynamic = ["version"]
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 name = "yeji"
 readme = "README.md"
 requires-python = ">=3.10"
 
 [project.optional-dependencies]
-documentation = ["sphinx>=7.2.6"]
+documentation = ["sphinx-rtd-theme>=2.0.0", "sphinx>=7.2.6"]
 test = ["pre-commit>=3.6.0", "pytest>=7.4.3"]
 
 [tool.ruff]
