@@ -4,7 +4,7 @@ copyright = "2023 Genentech, Inc."
 
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-extensions = []
+extensions = ["sphinx.ext.autodoc"]
 
 html_static_path = ["_static"]
 
