@@ -3,6 +3,7 @@
 *.py[cod]
 *.so
 *~
+.coverage
 .idea/
 .pytest_cache/
 .ruff_cache/
