@@ -15,6 +15,5 @@ jobs:
           skip-existing: true
 name: Publish
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [ published ]
