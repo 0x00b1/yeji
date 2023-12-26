@@ -1,5 +1,5 @@
-import yeji
+from yeji import increment
 
 
 def test_increment():
-    assert yeji.increment(1) == 2
+    assert increment(1) == 2
