@@ -20,3 +20,4 @@ GUY_PARTITION_ENERGY_INDEX = {
     "W": -000.510,
     "Y": -000.210,
 }
+""" """

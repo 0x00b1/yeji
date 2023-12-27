@@ -20,3 +20,4 @@ FASMAN_HYDROPHOBICITY_INDEX = {
     "W": -003.320,
     "Y": -001.010,
 }
+""" """

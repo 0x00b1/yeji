@@ -20,3 +20,4 @@ HOPP_WOODS_HYDROPHILICITY_INDEX = {
     "W": -003.400,
     "Y": -002.300,
 }
+""" """

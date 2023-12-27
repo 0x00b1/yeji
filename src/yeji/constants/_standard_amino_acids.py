@@ -1,22 +1,2 @@
-STANDARD_AMINO_ACIDS = [
-    "A",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "K",
-    "L",
-    "M",
-    "N",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "V",
-    "W",
-    "Y",
-]
+STANDARD_AMINO_ACIDS = "ACDEFGHIKLMNPQRSTVWY"
+""" """

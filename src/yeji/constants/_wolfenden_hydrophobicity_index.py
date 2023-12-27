@@ -20,3 +20,4 @@ WOLFENDEN_HYDROPHOBICITY_INDEX = {
     "W": -000.190,
     "Y": -000.230,
 }
+""" """

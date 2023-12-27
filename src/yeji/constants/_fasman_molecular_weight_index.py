@@ -20,3 +20,4 @@ FASMAN_MOLECULAR_WEIGHT_INDEX = {
     "W": +204.240,
     "Y": +181.190,
 }
+""" """

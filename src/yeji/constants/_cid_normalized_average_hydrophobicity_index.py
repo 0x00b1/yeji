@@ -20,3 +20,4 @@ CID_NORMALIZED_AVERAGE_HYDROPHOBICITY_INDEX = {
     "W": +001.710,
     "Y": +001.110,
 }
+""" """

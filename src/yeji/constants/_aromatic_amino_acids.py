@@ -1,5 +1,2 @@
-AROMATIC_AMINO_ACIDS = [
-    "Y",
-    "W",
-    "F",
-]
+AROMATIC_AMINO_ACIDS = "FWY"
+""" """

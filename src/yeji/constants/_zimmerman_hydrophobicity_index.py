@@ -20,3 +20,4 @@ ZIMMERMAN_HYDROPHOBICITY_INDEX = {
     "W": +000.310,
     "Y": +002.970,
 }
+""" """

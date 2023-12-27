@@ -20,3 +20,4 @@ ARGOS_HYDROPHOBICITY_INDEX = {
     "W": +002.650,
     "Y": +001.880,
 }
+""" """

@@ -20,3 +20,4 @@ ROSE_MEAN_FRACTIONAL_AREA_LOSS_INDEX = {
     "W": +000.850,
     "Y": +000.760,
 }
+""" """

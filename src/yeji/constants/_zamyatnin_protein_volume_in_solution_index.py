@@ -20,3 +20,4 @@ ZAMYATNIN_PROTEIN_VOLUME_IN_SOLUTION_INDEX = {
     "W": +227.800,
     "Y": +193.600,
 }
+""" """

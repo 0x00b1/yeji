@@ -20,3 +20,4 @@ KYTE_DOOLITTLE_HYDROPATHY_INDEX = {
     "W": -000.900,
     "Y": -001.300,
 }
+""" """

@@ -20,3 +20,4 @@ FASMAN_OPTICAL_ROTATION_INDEX = {
     "W": -033.700,
     "Y": -010.000,
 }
+""" """

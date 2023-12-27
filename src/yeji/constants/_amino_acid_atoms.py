@@ -48,3 +48,4 @@ AMINO_ACID_ATOMS = {
     ],
     "V": ["C", "CA", "CB", "CG1", "CG2", "N", "O"],
 }
+""" """

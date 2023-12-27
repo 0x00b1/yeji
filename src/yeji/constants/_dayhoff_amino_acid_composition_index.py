@@ -20,3 +20,4 @@ DAYHOFF_AMINO_ACID_COMPOSITION_INDEX = {
     "W": +001.300,
     "Y": +003.400,
 }
+""" """

@@ -20,3 +20,4 @@ AMINO_ACID_1_LETTER_SYMBOL_TO_3_LETTER_SYMBOL = {
     "W": "TRP",
     "Y": "TYR",
 }
+""" """
