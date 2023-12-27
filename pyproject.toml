@@ -14,8 +14,11 @@ requires-python = ">=3.10"
 documentation = ["sphinx-rtd-theme>=2.0.0", "sphinx>=7.2.6"]
 test = ["pre-commit>=3.6.0", "pytest-cov>=4.1.0", "pytest>=7.4.3"]
 
-[tool.pytest]
-addopts = "--cov=yeji --cov-omit ./src/yeji/constants"
+[tool.coverage.run]
+omit = ["./src/yeji/constants/*"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=yeji --cov-config=./pyproject.toml"
 
 [tool.ruff]
 ignore-init-module-imports = true
