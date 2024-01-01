@@ -5,10 +5,10 @@ from typing import Any, Optional, Union
 import torch
 from torch import Tensor
 
-from ._feature import _Feature
+from ._feature import Feature
 
 
-class RotationVector(_Feature):
+class RotationVector(Feature):
     @classmethod
     def _wrap(cls, tensor: Tensor) -> RotationVector:
         return tensor.as_subclass(cls)

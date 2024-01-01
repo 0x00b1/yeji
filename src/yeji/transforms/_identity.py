@@ -4,5 +4,5 @@ from ._transform import Transform
 
 
 class Identity(Transform):
-    def _transform(self, inpt: Any, params: Dict[str, Any]) -> Any:
-        return inpt
+    def _transform(self, input: Any, parameters: Dict[str, Any]) -> Any:
+        return input

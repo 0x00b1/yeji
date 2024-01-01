@@ -18,10 +18,10 @@ from torch import Tensor
 from torch._C import DisableTorchFunctionSubclass
 from torch.types import _device, _dtype, _size
 
-F = TypeVar("F", bound="_Feature")
+F = TypeVar("F", bound="Feature")
 
 
-class _Feature(Tensor):
+class Feature(Tensor):
     __f: Optional[ModuleType] = None
 
     @staticmethod
@@ -129,12 +129,12 @@ class _Feature(Tensor):
         #   ``prescient.transforms.functional`` import is deferred until the
         #   functional module is referenced and it’s shared across all
         #   instances of the class.
-        if _Feature.__f is None:
+        if Feature.__f is None:
             import prescient.transforms.functional
 
-            _Feature.__f = prescient.transforms.functional
+            Feature.__f = prescient.transforms.functional
 
-        return _Feature.__f
+        return Feature.__f
 
     @property
     def device(
@@ -182,7 +182,7 @@ class _Feature(Tensor):
 
 _InputType = Union[
     Dict[str, Tensor],
-    _Feature,
+    Feature,
     Sequence[Tensor],
     Tensor,
     str,

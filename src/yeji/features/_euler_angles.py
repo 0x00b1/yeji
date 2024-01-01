@@ -5,10 +5,10 @@ from typing import Any, Optional, Union
 import torch
 from torch import Tensor
 
-from ._feature import _Feature
+from ._feature import Feature
 
 
-class EulerAngles(_Feature):
+class EulerAngles(Feature):
     @classmethod
     def _wrap(cls, tensor: Tensor) -> EulerAngles:
         return tensor.as_subclass(cls)
