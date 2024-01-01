@@ -9,14 +9,30 @@ from ._feature import Feature
 
 
 class RotationVector(Feature):
+    degrees: bool
+
     @classmethod
-    def _wrap(cls, tensor: Tensor) -> RotationVector:
-        return tensor.as_subclass(cls)
+    def _wrap(cls, tensor: Tensor, *, degrees: bool = False) -> RotationVector:
+        if tensor.ndim == 0:
+            raise ValueError
+
+        if tensor.shape[-1] != 3:
+            raise ValueError
+
+        if tensor.ndim == 1:
+            tensor = torch.unsqueeze(tensor, 0)
+
+        rotation_vector = tensor.as_subclass(cls)
+
+        rotation_vector.degrees = degrees
+
+        return rotation_vector
 
     def __new__(
         cls,
         data: Any,
         *,
+        degrees: bool = False,
         dtype: Optional[torch.dtype] = None,
         device: Optional[Union[torch.device, str, int]] = None,
         requires_grad: Optional[bool] = None,
@@ -28,16 +44,7 @@ class RotationVector(Feature):
             requires_grad=requires_grad,
         )
 
-        if tensor.ndim == 0:
-            raise ValueError
-
-        if tensor.shape[-1] != 3:
-            raise ValueError
-
-        if tensor.ndim == 1:
-            tensor = torch.unsqueeze(tensor, 0)
-
-        return cls._wrap(tensor)
+        return cls._wrap(tensor, degrees=degrees)
 
     @classmethod
     def wrap_like(
@@ -48,7 +55,7 @@ class RotationVector(Feature):
         return cls._wrap(tensor)
 
     def __repr__(self, *, tensor_contents: Any = None) -> str:
-        return self._make_repr()
+        return self._make_repr(degrees=self.degrees)
 
 
 _RotationVectorType = Union[Tensor, RotationVector]
