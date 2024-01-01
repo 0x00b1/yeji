@@ -24,10 +24,10 @@ documentation = [
     "sphinx>=7.2.6",
 ]
 metrics = [
-    "matplotlib>=3.8.2",
-    "numpy>=1.26.2",
-    "torch>=2.1.2",
-    "torchmetrics>=1.2.1",
+    "matplotlib",
+    "numpy",
+    "torch",
+    "torchmetrics",
 ]
 test = [
     "pre-commit>=3.6.0",
