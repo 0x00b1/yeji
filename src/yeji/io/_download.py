@@ -1,323 +1,78 @@
 import bz2
-import contextlib
 import gzip
-import importlib.metadata
-import itertools
+import hashlib
 import lzma
 import os
 import os.path
-import re
+import pathlib
+import sys
 import tarfile
-import urllib.parse
+import urllib
+import urllib.error
 import urllib.request
 import zipfile
-from importlib.metadata import PackageNotFoundError
-from pathlib import Path
-from typing import IO, Callable, Iterator, Optional, Tuple, Union
-from urllib.error import URLError
 from urllib.request import Request
+from zipfile import ZipFile
+from typing import (
+    Callable,
+    Dict,
+    IO,
+    Iterable,
+    Iterator,
+    List,
+    Optional,
+    Tuple,
+    TypeVar,
+)
 
-import boto3
-from botocore.client import BaseClient
-from requests import Session
-from tqdm import tqdm
-from upath import UPath
+import tqdm
 
-from ._parse_s3_path import parse_s3_path
-from ._verify_checksum import verify_checksum
-from ._verify_integrity import verify_integrity
-
-try:
-    USER_AGENT = f"prescient/{importlib.metadata.version('prescient')}"
-except PackageNotFoundError:
-    USER_AGENT = "prescient"
-
-_COMPRESSED_FILE_OPENERS: dict[str, Callable[..., IO]] = {
+_COMPRESSED_FILE_OPENERS: Dict[str, Callable[..., IO]] = {
     ".bz2": bz2.open,
     ".gz": gzip.open,
     ".xz": lzma.open,
 }
-
-
-def extract_archive(
-    source: str,
-    destination: Optional[str] = None,
-    remove_archive: bool = False,
-) -> str:
-    if destination is None:
-        destination = os.path.dirname(source)
-
-    suffix, archive_type, compression_type = None, None, None
-
-    suffixes = Path(source).suffixes
-
-    if not suffixes:
-        raise RuntimeError
-
-    suffix_a = suffixes[-1]
-
-    aliases = {
-        ".tbz": (".tar", ".bz2"),
-        ".tbz2": (".tar", ".bz2"),
-        ".tgz": (".tar", ".gz"),
-    }
-
-    if suffix_a in aliases:
-        suffix, archive_type, compression_type = (
-            suffix_a,
-            aliases[suffix_a][0],
-            aliases[suffix_a][1],
-        )
-    elif suffix_a in _ARCHIVE_EXTRACTORS:
-        suffix, archive_type, compression_type = suffix_a, suffix_a, None
-    elif suffix_a in _COMPRESSED_FILE_OPENERS:
-        if len(suffixes) > 1:
-            suffix_b = suffixes[-2]
-
-            if suffix_b in _ARCHIVE_EXTRACTORS:
-                suffix, archive_type, compression_type = (
-                    f"{suffix_b}{suffix_a}",
-                    suffix_b,
-                    suffix_a,
-                )
-            else:
-                suffix, archive_type, compression_type = (
-                    suffix_a,
-                    None,
-                    suffix_a,
-                )
-
-        else:
-            suffix, archive_type, compression_type = suffix_a, None, suffix_a
-    else:
-        raise RuntimeError
-
-    if not archive_type:
-        destination = os.path.join(
-            destination,
-            os.path.basename(source).replace(suffix, ""),
-        )
-
-        if not compression_type:
-            raise RuntimeError
-
-        if destination is None:
-            if archive_type is None:
-                archive_type = ""
-
-            destination = source.replace(suffix, archive_type)
-
-        compressed_file_opener = _COMPRESSED_FILE_OPENERS[compression_type]
-
-        with (
-            compressed_file_opener(source, "rb") as reader,
-            open(destination, "wb") as writer,
-        ):
-            writer.write(reader.read())
-
-        if remove_archive:
-            os.remove(source)
-
-        return destination
-
-    extract = _ARCHIVE_EXTRACTORS[archive_type]
-
-    extract(source, destination, compression_type)
-
-    if remove_archive:
-        os.remove(source)
-
-    return destination
-
-
-def _extract_tar(
-    source: str,
-    destination: str,
-    compression: Optional[str],
-) -> None:
-    if compression is not None:
-        mode = f"r:{compression[1:]}"
-    else:
-        mode = "r"
-
-    with tarfile.open(source, mode) as f:
-        f.extractall(destination)
-
-
-def _extract_zip(
-    source: str,
-    destination: str,
-    compression: Optional[str],
-) -> None:
-    if compression is not None:
-        compression = {
-            ".bz2": zipfile.ZIP_BZIP2,
-            ".xz": zipfile.ZIP_LZMA,
-        }[compression]
-    else:
-        compression = zipfile.ZIP_STORED
-
-    with zipfile.ZipFile(source, "r", compression=compression) as f:
-        f.extractall(destination)
-
-
-_ARCHIVE_EXTRACTORS: dict[str, Callable[[str, str, Optional[str]], None]] = {
-    ".tar": _extract_tar,
-    ".zip": _extract_zip,
+_FILE_TYPE_ALIASES: Dict[str, Tuple[Optional[str], Optional[str]]] = {
+    ".tbz": (".tar", ".bz2"),
+    ".tbz2": (".tar", ".bz2"),
+    ".tgz": (".tar", ".gz"),
 }
 
+_ZIP_COMPRESSION_MAP: Dict[str, int] = {
+    ".bz2": zipfile.ZIP_BZIP2,
+    ".xz": zipfile.ZIP_LZMA,
+}
 
-def _get_google_drive_file_id(url: str) -> Optional[str]:
-    parts = urllib.parse.urlparse(url)
-
-    if re.match(r"(drive|docs)[.]google[.]com", parts.netloc) is None:
-        return None
-
-    match = re.match(r"/file/d/(?P<id>[^/]*)", parts.path)
-
-    if match is None:
-        return None
-
-    return match.group("id")
-
-
-def _get_redirect_url(url: str, maximum_hops: int = 3) -> str:
-    headers = {"Method": "HEAD", "User-Agent": USER_AGENT}
-
-    for _ in range(maximum_hops + 1):
-        import urllib.request
-
-        # Make the request using the custom SSL context
-        with urllib.request.urlopen(Request(url, headers=headers)) as response:
-            # with urllib.request.urlopen(Request(url, headers=headers)) as response:
-            if response.url == url or response.url is None:
-                return url
-
-            url = response.url
-    else:
-        raise RecursionError
-
-
-def _google_drive_download(
-    source: str,
-    destination: str,
-    filename: Optional[str] = None,
-    checksum: Optional[str] = None,
-):
-    destination = os.path.expanduser(destination)
-
-    if not filename:
-        filename = source
-
-    path = os.path.join(destination, filename)
-
-    os.makedirs(destination, exist_ok=True)
-
-    if verify_integrity(path, checksum):
-        return
-
-    params = {"id": source, "export": "download"}
-
-    with Session() as session:
-        response = session.get(
-            "https://drive.google.com/uc",
-            params=params,
-            stream=True,
-        )
-
-        for key, value in response.cookies.items():
-            if key.startswith("download_warning"):
-                token = value
-
-                break
-        else:
-            response, content = _parse_google_drive_response(response)
-
-            if response == "Virus scan warning":
-                token = "t"
-            else:
-                token = None
-
-        if token is not None:
-            response, content = _parse_google_drive_response(
-                session.get(
-                    "https://drive.google.com/uc",
-                    params=dict(params, confirm=token),
-                    stream=True,
-                ),
-            )
-
-        if response == "Quota exceeded":
-            raise RuntimeError
-
-        _save_response_content(content, path)
-
-    if os.stat(path).st_size < 10 * 1024:
-        with contextlib.suppress(UnicodeDecodeError), open(path) as file:
-            text = file.read()
-
-            if re.search(
-                r"</?\s*[a-z-][^>]*\s*>|(&(?:[\w\d]+|#\d+|#x[a-f\d]+);)",
-                text,
-            ):
-                raise ValueError
-
-    if checksum and not verify_checksum(path, checksum):
-        raise RuntimeError
-
-
-def _parse_google_drive_response(
-    response,
-    chunk_size: int = 32 * 1024,
-) -> Tuple[bytes, Iterator[bytes]]:
-    content = response.iter_content(chunk_size)
-
-    first_chunk = None
-
-    while not first_chunk:
-        first_chunk = next(content)
-
-    content = itertools.chain([first_chunk], content)
-
-    try:
-        matches = re.search(
-            "<title>Google Drive - (?P<response>.+?)</title>",
-            first_chunk.decode(),
-        )
-
-        if matches is not None:
-            response = matches["response"]
-        else:
-            response = None
-    except UnicodeDecodeError:
-        response = None
-
-    return response, content
+# FIXME: THIS IS A TEMPORARY USER AGENT STRING:
+USER_AGENT = "yuji"
 
 
 def _save_response_content(
-    chunks: Iterator[bytes],
+    content: Iterator[bytes],
     destination: str,
     length: Optional[int] = None,
 ):
-    with open(destination, "wb") as file, tqdm(total=length) as progress_bar:
-        for chunk in chunks:
+    with (
+        open(destination, "wb") as file_descriptor,
+        tqdm.tqdm(total=length) as progress_bar,
+    ):
+        for chunk in content:
             if not chunk:
                 continue
 
-            file.write(chunk)
+            file_descriptor.write(chunk)
 
             progress_bar.update(len(chunk))
 
 
-def _urlretrieve(url: str, filename: str, chunk_size: int = 1024 * 32):
-    headers = {"User-Agent": USER_AGENT}
-
-    import urllib.request
-
-    # Make the request using the custom SSL context
-    with urllib.request.urlopen(Request(url, headers=headers)) as response:
-        # with urllib.request.urlopen(Request(url, headers=headers)) as response:
+def _urlretrieve(
+    url: str,
+    filename: str,
+    chunk_size: int = 32768,
+) -> None:
+    with urllib.request.urlopen(
+        Request(url, headers={"User-Agent": USER_AGENT}),
+    ) as response:
         _save_response_content(
             iter(lambda: response.read(chunk_size), b""),
             filename,
@@ -325,142 +80,360 @@ def _urlretrieve(url: str, filename: str, chunk_size: int = 1024 * 32):
         )
 
 
-def _s3_download(
-    s3_path: Union[UPath, Path, str],
-    local_path: Union[UPath, Path, str],
-    boto3_s3_client: Optional[BaseClient] = None,
-):
-    """
-    Download a file from an S3 bucket and save it to a local path.
-
-    Parameters
-    ----------
-    s3_path : Union[UPath, Path, str]
-        The S3 bucket path of the file to be downloaded.
-    local_path : Union[UPath, Path, str]
-        The local file path where the downloaded file will be saved.
-    boto3_s3_client : Optional[BaseClient], optional
-        The boto S3 client to use, by default None.
-
-    """
-    bucket_name, bucket_key = parse_s3_path(s3_path=s3_path)
-
-    if boto3_s3_client is None:
-        boto3_s3_client = boto3.client("s3")
-
-    boto3_s3_client.download_file(bucket_name, bucket_key, str(local_path))
+def calculate_md5(fpath: str, chunk_size: int = 1024 * 1024) -> str:
+    # Setting the `usedforsecurity` flag does not change anything about the functionality, but indicates that we are
+    # not using the MD5 checksum for cryptography. This enables its usage in restricted environments like FIPS. Without
+    # it torchvision.datasets is unusable in these environments since we perform a MD5 check everywhere.
+    if sys.version_info >= (3, 9):
+        md5 = hashlib.md5(usedforsecurity=False)
+    else:
+        md5 = hashlib.md5()
+    with open(fpath, "rb") as f:
+        while chunk := f.read(chunk_size):
+            md5.update(chunk)
+    return md5.hexdigest()
 
 
-def download(
-    source: Union[str, Path],
-    destination: Union[str, Path],
-    filename: Union[str, None] = None,
-    checksum: Union[str, None] = None,
-    maximum_redirect_url_hops: int = 3,
-    boto3_s3_client: Union[BaseClient, None] = None,
-):
-    """
-    Download a file from a URL and save it to a local path.
-    Supports standard URLs, Google Drive, and S3.
+def check_integrity(path: str, checksum: Optional[str] = None) -> bool:
+    if not os.path.isfile(path):
+        return False
 
-    Parameters
-    ----------
-    source : str | Path
-        The URL of the file to be downloaded.
-    destination : str | Path
-        The local directory where the downloaded file will be saved.
-    filename : str | None, optional
-        The name of the file to be saved, by default None.
-    checksum : str | None, optional
-        The checksum of the file to be downloaded, by default None.
-    maximum_redirect_url_hops : int, optional
-        The maximum number of hops to follow when resolving a URL redirect, by default 3.
-    boto3_s3_client : BaseClient | None, optional
-        The boto S3 client to use, by default None.
+    if checksum is None:
+        return True
 
-    """
-    destination = os.path.expanduser(destination)
+    return checksum == calculate_md5(path)
 
-    if not filename:
-        filename = os.path.basename(source)
 
-    path = os.path.join(destination, filename)
+def _get_redirect_url(url: str, max_hops: int = 3) -> str:
+    initial_url = url
+    headers = {"Method": "HEAD", "User-Agent": USER_AGENT}
 
-    os.makedirs(destination, exist_ok=True)
+    for _ in range(max_hops + 1):
+        with urllib.request.urlopen(
+            urllib.request.Request(url, headers=headers)
+        ) as response:
+            if response.url == url or response.url is None:
+                return url
 
-    if verify_integrity(path, checksum):
-        return
-
-    if urllib.parse.urlparse(source).scheme == "s3":
-        return _s3_download(source, path, boto3_s3_client)
-
-    source = _get_redirect_url(
-        source,
-        maximum_hops=maximum_redirect_url_hops,
-    )
-
-    # TEST IF FILE IS ON GOOGLE DRIVE:
-    google_drive_file_id = _get_google_drive_file_id(source)
-
-    if google_drive_file_id is not None:
-        return _google_drive_download(
-            google_drive_file_id,
-            destination,
-            filename,
-            checksum,
+            url = response.url
+    else:
+        raise RecursionError(
+            f"Request to {initial_url} exceeded {max_hops} redirects. The last redirect points to {url}."
         )
 
+
+def download_url(
+    url: str,
+    directory: str,
+    filename: Optional[str] = None,
+    checksum: Optional[str] = None,
+    max_redirect_hops: int = 3,
+):
+    """Download a file from a url and place it in root.
+
+    Args:
+        url (str): URL to download file from
+        directory (str): Directory to place downloaded file in
+        filename (str, optional): Name to save the file under. If None, use the basename of the URL
+        checksum (str, optional): MD5 checksum of the download. If None, do not check
+        max_redirect_hops (int, optional): Maximum number of redirect hops allowed
+    """
+    directory = os.path.expanduser(directory)
+
+    if not filename:
+        filename = os.path.basename(url)
+
+    fpath = os.path.join(directory, filename)
+
+    os.makedirs(directory, exist_ok=True)
+
+    # check if file is already present locally
+    if check_integrity(fpath, checksum):
+        print("Using downloaded and verified file: " + fpath)
+
+        return
+
+    # expand redirect chain if needed
+    url = _get_redirect_url(url, max_hops=max_redirect_hops)
+
+    # download the file
     try:
-        _urlretrieve(source, path)
-    except (URLError, OSError) as error:
-        if source[:5] == "https":
-            source = source.replace("https:", "http:")
-
-            # TODO: Add an insecure connection warning?
-
-            _urlretrieve(source, path)
+        print("Downloading " + url + " to " + fpath)
+        _urlretrieve(url, fpath)
+    except (urllib.error.URLError, OSError) as e:  # type: ignore[attr-defined]
+        if url[:5] == "https":
+            url = url.replace("https:", "http:")
+            print(
+                "Failed download. Trying https -> http instead. Downloading "
+                + url
+                + " to "
+                + fpath
+            )
+            _urlretrieve(url, fpath)
         else:
-            raise error
+            raise e
 
-    if not verify_integrity(path, checksum):
-        raise RuntimeError
+    # check integrity of downloaded file
+    if not check_integrity(fpath, checksum):
+        raise RuntimeError("File not found or corrupted.")
+
+
+def list_dir(root: str, prefix: bool = False) -> List[str]:
+    """List all directories at a given root
+
+    Args:
+        root (str): Path to directory whose folders need to be listed
+        prefix (bool, optional): If true, prepends the path to each result, otherwise
+            only returns the name of the directories found
+    """
+    root = os.path.expanduser(root)
+    directories = [
+        p for p in os.listdir(root) if os.path.isdir(os.path.join(root, p))
+    ]
+    if prefix is True:
+        directories = [os.path.join(root, d) for d in directories]
+    return directories
+
+
+def list_files(root: str, suffix: str, prefix: bool = False) -> List[str]:
+    """List all files ending with a suffix at a given root
+
+    Args:
+        root (str): Path to directory whose folders need to be listed
+        suffix (str or tuple): Suffix of the files to match, e.g. '.png' or ('.jpg', '.png').
+            It uses the Python "str.endswith" method and is passed directly
+        prefix (bool, optional): If true, prepends the path to each result, otherwise
+            only returns the name of the files found
+    """
+    root = os.path.expanduser(root)
+    files = [
+        p
+        for p in os.listdir(root)
+        if os.path.isfile(os.path.join(root, p)) and p.endswith(suffix)
+    ]
+    if prefix is True:
+        files = [os.path.join(root, d) for d in files]
+    return files
+
+
+def _extract_tar(from_path: str, to_path: str, compression: Optional[str]):
+    with tarfile.open(
+        from_path, f"r:{compression[1:]}" if compression else "r"
+    ) as tar:
+        tar.extractall(to_path)
+
+
+def _extract_zip(from_path: str, to_path: str, compression: Optional[str]):
+    with ZipFile(
+        from_path,
+        "r",
+        compression=_ZIP_COMPRESSION_MAP[compression]
+        if compression
+        else zipfile.ZIP_STORED,
+    ) as zip:
+        zip.extractall(to_path)
+
+
+_ARCHIVE_EXTRACTORS: Dict[str, Callable[[str, str, Optional[str]], None]] = {
+    ".tar": _extract_tar,
+    ".zip": _extract_zip,
+}
+
+
+def _detect_file_type(file: str) -> Tuple[str, Optional[str], Optional[str]]:
+    """Detect the archive type and/or compression of a file.
+
+    Args:
+        file (str): the filename
+
+    Returns:
+        (tuple): tuple of suffix, archive type, and compression
+
+    Raises:
+        RuntimeError: if file has no suffix or suffix is not supported
+    """
+    suffixes = pathlib.Path(file).suffixes
+    if not suffixes:
+        raise RuntimeError(
+            f"File '{file}' has no suffixes that could be used to detect the archive type and compression."
+        )
+    suffix = suffixes[-1]
+
+    # check if the suffix is a known alias
+    if suffix in _FILE_TYPE_ALIASES:
+        return (suffix, *_FILE_TYPE_ALIASES[suffix])
+
+    # check if the suffix is an archive type
+    if suffix in _ARCHIVE_EXTRACTORS:
+        return suffix, suffix, None
+
+    # check if the suffix is a compression
+    if suffix in _COMPRESSED_FILE_OPENERS:
+        # check for suffix hierarchy
+        if len(suffixes) > 1:
+            suffix2 = suffixes[-2]
+
+            # check if the suffix2 is an archive type
+            if suffix2 in _ARCHIVE_EXTRACTORS:
+                return suffix2 + suffix, suffix2, suffix
+
+        return suffix, None, suffix
+
+    valid_suffixes = sorted(
+        set(_FILE_TYPE_ALIASES)
+        | set(_ARCHIVE_EXTRACTORS)
+        | set(_COMPRESSED_FILE_OPENERS)
+    )
+    raise RuntimeError(
+        f"Unknown compression or archive type: '{suffix}'.\nKnown suffixes are: '{valid_suffixes}'."
+    )
+
+
+def _decompress(
+    from_path: str,
+    to_path: Optional[str] = None,
+    remove_finished: bool = False,
+) -> str:
+    r"""Decompress a file.
+
+    The compression is automatically detected from the file name.
+
+    Args:
+        from_path (str): Path to the file to be decompressed.
+        to_path (str): Path to the decompressed file. If omitted, ``from_path`` without compression extension is used.
+        remove_finished (bool): If ``True``, remove the file after the extraction.
+
+    Returns:
+        (str): Path to the decompressed file.
+    """
+    suffix, archive_type, compression = _detect_file_type(from_path)
+    if not compression:
+        raise RuntimeError(
+            f"Couldn't detect a compression from suffix {suffix}."
+        )
+
+    if to_path is None:
+        to_path = from_path.replace(
+            suffix, archive_type if archive_type is not None else ""
+        )
+
+    # We don't need to check for a missing key here, since this was already done in _detect_file_type()
+    compressed_file_opener = _COMPRESSED_FILE_OPENERS[compression]
+
+    with compressed_file_opener(from_path, "rb") as rfh, open(
+        to_path, "wb"
+    ) as wfh:
+        wfh.write(rfh.read())
+
+    if remove_finished:
+        os.remove(from_path)
+
+    return to_path
+
+
+def extract_archive(
+    from_path: str,
+    to_path: Optional[str] = None,
+    remove_finished: bool = False,
+) -> str:
+    """Extract an archive.
+
+    The archive type and a possible compression is automatically detected from the file name. If the file is compressed
+    but not an archive the call is dispatched to :func:`decompress`.
+
+    Args:
+        from_path (str): Path to the file to be extracted.
+        to_path (str): Path to the directory the file will be extracted to. If omitted, the directory of the file is
+            used.
+        remove_finished (bool): If ``True``, remove the file after the extraction.
+
+    Returns:
+        (str): Path to the directory the file was extracted to.
+    """
+    if to_path is None:
+        to_path = os.path.dirname(from_path)
+
+    suffix, archive_type, compression = _detect_file_type(from_path)
+    if not archive_type:
+        return _decompress(
+            from_path,
+            os.path.join(
+                to_path, os.path.basename(from_path).replace(suffix, "")
+            ),
+            remove_finished=remove_finished,
+        )
+
+    # We don't need to check for a missing key here, since this was already done in _detect_file_type()
+    extractor = _ARCHIVE_EXTRACTORS[archive_type]
+
+    extractor(from_path, to_path, compression)
+    if remove_finished:
+        os.remove(from_path)
+
+    return to_path
 
 
 def download_and_extract_archive(
-    resource: Union[str, Path],
-    source: Union[str, Path],
-    destination: Union[str, Path, None] = None,
-    name: Union[str, None] = None,
-    checksum: Union[str, None] = None,
-    remove_archive: bool = False,
+    url: str,
+    download_root: str,
+    extract_root: Optional[str] = None,
+    filename: Optional[str] = None,
+    md5: Optional[str] = None,
+    remove_finished: bool = False,
 ) -> None:
-    """Download and extract an archive file.
+    download_root = os.path.expanduser(download_root)
+    if extract_root is None:
+        extract_root = download_root
+    if not filename:
+        filename = os.path.basename(url)
 
-    Parameters
-    ----------
-    resource : str
-        The URL of the resource to download.
-    source : str
-        The directory where the archive file will be downloaded.
-    destination : str, optional
-        The directory where the archive file will be extracted, by default None.
-    name : str, optional
-        The name of the archive file, by default None.
-    checksum : str, optional
-        The checksum of the archive file, by default None.
-    remove_archive : bool, optional
-        Whether to remove the archive file after extraction, by default False.
-    """
-    source = os.path.expanduser(source)
+    download_url(url, download_root, filename, md5)
 
-    if destination is None:
-        destination = source
+    archive = os.path.join(download_root, filename)
+    print(f"Extracting {archive} to {extract_root}")
+    extract_archive(archive, extract_root, remove_finished)
 
-    if not name:
-        name = os.path.basename(resource)
 
-    download(resource, source, name, checksum)
+def iterable_to_str(iterable: Iterable) -> str:
+    return "'" + "', '".join([str(item) for item in iterable]) + "'"
 
-    archive = os.path.join(source, name)
 
-    extract_archive(archive, destination, remove_archive)
+T = TypeVar("T", str, bytes)
+
+
+def verify_str_arg(
+    value: T,
+    arg: Optional[str] = None,
+    valid_values: Optional[Iterable[T]] = None,
+    custom_msg: Optional[str] = None,
+) -> T:
+    if not isinstance(value, str):
+        if arg is None:
+            raise ValueError(
+                "Expected type str, but got type {type}.".format(
+                    type=type(value),
+                )
+            )
+
+        raise ValueError(
+            "Expected type str for argument {arg}, but got type {type}.".format(
+                type=type(value), arg=arg
+            )
+        )
+
+    if valid_values is None:
+        return value
+
+    if value not in valid_values:
+        if custom_msg is not None:
+            msg = custom_msg
+        else:
+            msg = "Unknown value '{value}' for argument {arg}. Valid values are {{{valid_values}}}."
+            msg = msg.format(
+                value=value,
+                arg=arg,
+                valid_values=iterable_to_str(valid_values),
+            )
+        raise ValueError(msg)
+
+    return value
