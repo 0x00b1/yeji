@@ -3,7 +3,7 @@ from typing import Dict, Any
 from torch import Tensor
 
 import yeji.transforms.functional
-from yeji.features import EulerAngles
+from yeji.features import RotationMatrix
 from ._transform import Transform
 
 
@@ -14,5 +14,5 @@ class ToRotationMatrix(Transform):
         self,
         input: Tensor,
         parameters: Dict[str, Any],
-    ) -> EulerAngles:
+    ) -> RotationMatrix:
         return yeji.transforms.functional.to_rotation_matrix(input)
