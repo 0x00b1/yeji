@@ -96,11 +96,11 @@ class Feature(Tensor):
             #   The ``__torch_function__`` protocol will invoke this method
             #   on each type in the computation by walking the method
             #   resolution  order (MRO). For example,
-            #   ``Tensor(...).to(prescient.features.Foo( ...))`` invokes
-            #   ``prescient.features.Foo.__torch_function__`` with
-            #   ``args = (Tensor(), prescient.featues.Foo())``.
+            #   ``Tensor(...).to(yeji.features.Foo( ...))`` invokes
+            #   ``yeji.features.Foo.__torch_function__`` with
+            #   ``args = (Tensor(), yeji.featues.Foo())``.
             #   Without this guard, ``Tensor`` would be wrapped into
-            #   ``prescient.features.Foo``.
+            #   ``yeji.features.Foo``.
             if wrapper and isinstance(args[0], cls):
                 return wrapper(cls, args[0], output)
 
@@ -124,15 +124,15 @@ class Feature(Tensor):
     @property
     def _f(self) -> ModuleType:
         # NOTE:
-        #   Lazy import of ``prescient.transforms.functional`` to bypass the
+        #   Lazy import of ``yeji.transforms.functional`` to bypass the
         #   ``ImportError`` raised by the circual import. The
-        #   ``prescient.transforms.functional`` import is deferred until the
+        #   ``yeji.transforms.functional`` import is deferred until the
         #   functional module is referenced and it’s shared across all
         #   instances of the class.
         if Feature.__f is None:
-            import prescient.transforms.functional
+            import yeji.transforms.functional
 
-            Feature.__f = prescient.transforms.functional
+            Feature.__f = yeji.transforms.functional
 
         return Feature.__f
 
