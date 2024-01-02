@@ -1,14 +1,44 @@
 from __future__ import annotations
 
+from typing import Callable, Union, Optional, Any
+
+import torch
 from torch.utils.data import Dataset
+
+from yeji.features import EulerAngles
+from yeji.transforms import Transform, ToEulerAngles
 
 
 class RandomEulerAnglesDataset(Dataset):
-    def __init__(self):
-        pass
+    def __init__(
+        self,
+        size: int = 2048,
+        axes: str = "xyz",
+        degrees: bool = False,
+        transform: Optional[Union[Callable, Transform]] = None,
+    ):
+        super().__init__()
 
-    def __len__(self):
-        pass
+        self._size = size
 
-    def __getitem__(self, idx):
-        pass
+        self._axes = axes
+
+        self._degrees = degrees
+
+        self._transform = transform
+
+    def __getitem__(self, index: int) -> Union[EulerAngles, Any]:
+        if index >= len(self):
+            raise IndexError
+
+        item = torch.randn(3)
+
+        item = ToEulerAngles()(item)
+
+        if self._transform is not None:
+            item = self._transform(item)
+
+        return item
+
+    def __len__(self) -> int:
+        return self._size
