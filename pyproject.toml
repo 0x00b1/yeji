@@ -48,4 +48,7 @@ addopts = "--cov=yeji --cov-config=./pyproject.toml"
 ignore-init-module-imports = true
 line-length = 79
 
+[tool.ruff.lint]
+extend-select = ["I"]
+
 [tool.setuptools_scm]
