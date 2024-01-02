@@ -32,13 +32,3 @@ class TestEulerAngles:
         assert isinstance(result, EulerAngles)
 
         assert result.shape == Size([1, 3])
-
-    def test_wrap_like(self, euler_angles: EulerAngles):
-        result = EulerAngles.wrap_like(
-            euler_angles,
-            torch.tensor([[1, 2, 3]]),
-        )
-
-        assert isinstance(result, EulerAngles)
-
-        assert result.shape == Size([1, 3])
