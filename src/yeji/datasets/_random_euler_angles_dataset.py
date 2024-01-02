@@ -33,7 +33,7 @@ class RandomEulerAnglesDataset(Dataset):
 
         item = torch.randn(3)
 
-        item = ToEulerAngles()(item)
+        item = ToEulerAngles()(item, axes=self._axes, degrees=self._degrees)
 
         if self._transform is not None:
             item = self._transform(item)

@@ -16,4 +16,4 @@ class ToEulerAngles(Transform):
         input: Tensor,
         parameters: Dict[str, Any],
     ) -> EulerAngles:
-        return yeji.transforms.functional.to_euler_angles(input)
+        return yeji.transforms.functional.to_euler_angles(input, **parameters)
