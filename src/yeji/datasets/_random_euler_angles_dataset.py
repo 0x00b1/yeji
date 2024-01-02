@@ -6,7 +6,7 @@ import torch
 from torch.utils.data import Dataset
 
 from yeji.features import EulerAngles
-from yeji.transforms import Transform, ToEulerAngles
+from yeji.transforms import ToEulerAngles, Transform
 
 
 class RandomEulerAnglesDataset(Dataset):
