@@ -2,9 +2,8 @@ import copy
 
 import pytest
 import torch
-
-from yeji.features._feature import Feature
 import yeji.transforms.functional
+from yeji.features._feature import Feature
 
 
 class Test_Feature:

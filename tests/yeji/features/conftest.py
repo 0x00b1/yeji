@@ -1,6 +1,5 @@
 import pytest
 import torch
-
 from yeji.features._feature import Feature
 
 

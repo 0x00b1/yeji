@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Union, Optional, Any
+from typing import Any, Callable, Optional, Union
 
 import torch
 from torch.utils.data import Dataset

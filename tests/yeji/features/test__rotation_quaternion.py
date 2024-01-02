@@ -1,7 +1,6 @@
 import pytest
 import torch
 from torch import Size
-
 from yeji.features import RotationQuaternion
 
 

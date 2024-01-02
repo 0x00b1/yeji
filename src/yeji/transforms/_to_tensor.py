@@ -2,8 +2,8 @@ from typing import Any, Dict
 
 from torch import Tensor
 
-from ._transform import Transform
 from ..features._feature import Feature
+from ._transform import Transform
 
 
 class ToTensor(Transform):
