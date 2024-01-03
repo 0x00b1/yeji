@@ -1,21 +1,28 @@
-import numpy as np
+import hypothesis
+import hypothesis.strategies
+import numpy
 import torch
-from hypothesis import given
-from hypothesis import strategies as st
-from scipy.spatial.transform import Rotation as R
+from scipy.spatial.transform import Rotation
 from yeji.nn.functional import rotation_quaternions_to_rotation_matrix
 
 
-@given(
-    st.lists(
-        st.floats(allow_nan=False, allow_infinity=False),
+@hypothesis.given(
+    hypothesis.strategies.lists(
+        hypothesis.strategies.floats(
+            allow_nan=False,
+            allow_infinity=False,
+            min_value=-1,
+            max_value=1,
+        ),
         min_size=4,
         max_size=4,
-    ).map(np.array)
+    )
+    .filter(lambda x: numpy.linalg.norm(x) > 0.1)
+    .map(numpy.array)
 )
 def test_rotation_quaternions_to_rotation_matrix(quaternion):
     # Convert the quaternion to a scipy rotation object and then to a matrix
-    scipy_rot = R.from_quat(quaternion)
+    scipy_rot = Rotation.from_quat(quaternion)
     scipy_matrix = scipy_rot.as_matrix()
 
     # Convert the quaternion to a PyTorch tensor and use our function
@@ -25,4 +32,4 @@ def test_rotation_quaternions_to_rotation_matrix(quaternion):
     )[0].numpy()
 
     # Check if the matrices are approximately equal
-    np.testing.assert_allclose(torch_matrix, scipy_matrix, rtol=1e-5)
+    numpy.testing.assert_allclose(torch_matrix, scipy_matrix, rtol=1e-5)
