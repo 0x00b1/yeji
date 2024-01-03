@@ -3,7 +3,7 @@ from ._identity import Identity
 from ._lambda import Lambda
 from ._to_euler_angles import ToEulerAngles
 from ._to_rotation_matrix import ToRotationMatrix
-from ._to_rotation_quaternion import ToRotationQuaternion
+from ._to_rotation_quaternions import ToRotationQuaternions
 from ._to_rotation_vector import ToRotationVector
 from ._to_tait_bryan_angles import ToTaitBryanAngles
 from ._to_tensor import ToTensor
@@ -15,7 +15,7 @@ __all__ = [
     "Lambda",
     "ToEulerAngles",
     "ToRotationMatrix",
-    "ToRotationQuaternion",
+    "ToRotationQuaternions",
     "ToRotationVector",
     "ToTaitBryanAngles",
     "ToTensor",

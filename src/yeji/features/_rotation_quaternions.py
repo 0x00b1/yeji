@@ -8,9 +8,9 @@ from torch import Tensor
 from yeji.features._feature import Feature
 
 
-class RotationQuaternion(Feature):
+class RotationQuaternions(Feature):
     @classmethod
-    def _wrap(cls, tensor: Tensor) -> RotationQuaternion:
+    def _wrap(cls, tensor: Tensor) -> RotationQuaternions:
         return tensor.as_subclass(cls)
 
     def __new__(
@@ -20,7 +20,7 @@ class RotationQuaternion(Feature):
         dtype: Optional[torch.dtype] = None,
         device: Optional[Union[torch.device, str, int]] = None,
         requires_grad: Optional[bool] = None,
-    ) -> RotationQuaternion:
+    ) -> RotationQuaternions:
         tensor = cls._to_tensor(
             data,
             dtype=dtype,
@@ -39,17 +39,17 @@ class RotationQuaternion(Feature):
     @classmethod
     def wrap_like(
         cls,
-        other: RotationQuaternion,
+        other: RotationQuaternions,
         tensor: Tensor,
-    ) -> RotationQuaternion:
+    ) -> RotationQuaternions:
         return cls._wrap(tensor)
 
     def __repr__(self, *, tensor_contents: Any = None) -> str:
         return self._make_repr()
 
 
-_RotationQuaternionType = Union[Tensor, RotationQuaternion]
+_RotationQuaternionType = Union[Tensor, RotationQuaternions]
 _RotationQuaternionTypeJIT = Tensor
 
-_TensorRotationQuaternionType = Union[Tensor, RotationQuaternion]
+_TensorRotationQuaternionType = Union[Tensor, RotationQuaternions]
 _TensorRotationQuaternionTypeJIT = Tensor

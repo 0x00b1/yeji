@@ -3,7 +3,7 @@ from __future__ import annotations
 from torch.utils.data import Dataset
 
 
-class RandomRotationQuaternionDataset(Dataset):
+class RandomRotationQuaternionsDataset(Dataset):
     def __init__(self):
         pass
 
