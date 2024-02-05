@@ -5,10 +5,10 @@ from torch.utils.data import Dataset
 
 class RandomRotationQuaternionsDataset(Dataset):
     def __init__(self):
-        pass
+        raise NotImplementedError
 
-    def __len__(self):
-        pass
+    def __getitem__(self, index: int):
+        raise NotImplementedError
 
-    def __getitem__(self, idx):
-        pass
+    def __len__(self) -> int:
+        raise NotImplementedError
