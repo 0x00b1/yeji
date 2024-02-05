@@ -17,6 +17,7 @@ from ._carbon_mangels_cytochrome_p450_2d6_substrate_dataset import (
 from ._carbon_mangels_cytochrome_p450_3a4_substrate_dataset import (
     CarbonMangelsCytochromeP4503A4SubstrateDataset,
 )
+from ._chembl_dataset import ChEMBLDataset
 from ._davis_dataset import DAVISDataset
 from ._disgenet_dataset import DisGeNETDataset
 from ._drugcomb_dataset import DrugCombDataset
@@ -35,7 +36,9 @@ from ._ma_bioavailability_dataset import MaBioavailabilityDataset
 from ._martins_blood_brain_barrier_dataset import (
     MartinsBloodBrainBarrierDataset,
 )
+from ._moses_dataset import MOSESDataset
 from ._obach_half_life_dataset import ObachHalfLifeDataset
+from ._pdbbind_dataset import PDBbindDataset
 from ._qm7_dataset import QM7Dataset
 from ._qm7b_dataset import QM7bDataset
 from ._qm8_dataset import QM8Dataset
@@ -77,6 +80,7 @@ __all__ = [
     "CarbonMangelsCytochromeP4502C9SubstrateDataset",
     "CarbonMangelsCytochromeP4502D6SubstrateDataset",
     "CarbonMangelsCytochromeP4503A4SubstrateDataset",
+    "ChEMBLDataset",
     "DAVISDataset",
     "DisGeNETDataset",
     "DrugCombDataset",
@@ -87,9 +91,11 @@ __all__ = [
     "HuRIDataset",
     "KIBADataset",
     "LombardoVolumeOfDistributionAtSteadyStateDataset",
+    "MOSESDataset",
     "MaBioavailabilityDataset",
     "MartinsBloodBrainBarrierDataset",
     "ObachHalfLifeDataset",
+    "PDBbindDataset",
     "QM7Dataset",
     "QM7bDataset",
     "QM8Dataset",
