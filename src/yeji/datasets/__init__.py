@@ -50,6 +50,7 @@ from ._random_rotation_quaternions_dataset import (
 )
 from ._random_rotation_vector_dataset import RandomRotationVectorDataset
 from ._random_tait_bryan_angles_dataset import RandomTaitBryanAnglesDataset
+from ._real_database_dataset import REALDatabaseDataset
 from ._sabdab_dataset import SAbDabDataset
 from ._veith_cytochrome_p450_1a2_inhibition_dataset import (
     VeithCytochromeP4501A2InhibitionDataset,
@@ -100,6 +101,7 @@ __all__ = [
     "QM7bDataset",
     "QM8Dataset",
     "QM9Dataset",
+    "REALDatabaseDataset",
     "RandomEulerAnglesDataset",
     "RandomRotationMatrixDataset",
     "RandomRotationQuaternionsDataset",
