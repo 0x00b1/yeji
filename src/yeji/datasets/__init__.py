@@ -1,3 +1,45 @@
+from ._aqsoldb_dataset import AqSolDBDataset
+from ._astrazeneca_clearance_dataset import AstraZenecaClearanceDataset
+from ._astrazeneca_lipophilicity_dataset import AstraZenecaLipophilicityDataset
+from ._astrazeneca_plasma_protein_binding_rate_dataset import (
+    AstraZenecaPlasmaProteinBindingRateDataset,
+)
+from ._bindingdb_dataset import BindingDBDataset
+from ._broccatelli_p_glycoprotein_inhibition_dataset import (
+    BroccatelliPGlycoproteinInhibitionDataset,
+)
+from ._carbon_mangels_cytochrome_p450_2c9_substrate_dataset import (
+    CarbonMangelsCytochromeP4502C9SubstrateDataset,
+)
+from ._carbon_mangels_cytochrome_p450_2d6_substrate_dataset import (
+    CarbonMangelsCytochromeP4502D6SubstrateDataset,
+)
+from ._carbon_mangels_cytochrome_p450_3a4_substrate_dataset import (
+    CarbonMangelsCytochromeP4503A4SubstrateDataset,
+)
+from ._davis_dataset import DAVISDataset
+from ._disgenet_dataset import DisGeNETDataset
+from ._drugcomb_dataset import DrugCombDataset
+from ._freesolv_dataset import FreeSolvDataset
+from ._gdsc1_dataset import GDSC1Dataset
+from ._gdsc2_dataset import GDSC2Dataset
+from ._hou_human_intestinal_absorption_dataset import (
+    HouHumanIntestinalAbsorptionDataset,
+)
+from ._huri_dataset import HuRIDataset
+from ._kiba_dataset import KIBADataset
+from ._lombardo_volume_of_distribution_at_steady_state_dataset import (
+    LombardoVolumeOfDistributionAtSteadyStateDataset,
+)
+from ._ma_bioavailability_dataset import MaBioavailabilityDataset
+from ._martins_blood_brain_barrier_dataset import (
+    MartinsBloodBrainBarrierDataset,
+)
+from ._obach_half_life_dataset import ObachHalfLifeDataset
+from ._qm7_dataset import QM7Dataset
+from ._qm7b_dataset import QM7bDataset
+from ._qm8_dataset import QM8Dataset
+from ._qm9_dataset import QM9Dataset
 from ._random_euler_angles_dataset import RandomEulerAnglesDataset
 from ._random_rotation_matrix_dataset import RandomRotationMatrixDataset
 from ._random_rotation_quaternions_dataset import (
@@ -5,11 +47,63 @@ from ._random_rotation_quaternions_dataset import (
 )
 from ._random_rotation_vector_dataset import RandomRotationVectorDataset
 from ._random_tait_bryan_angles_dataset import RandomTaitBryanAnglesDataset
+from ._sabdab_dataset import SAbDabDataset
+from ._veith_cytochrome_p450_1a2_inhibition_dataset import (
+    VeithCytochromeP4501A2InhibitionDataset,
+)
+from ._veith_cytochrome_p450_2c9_inhibition_dataset import (
+    VeithCytochromeP4502C9InhibitionDataset,
+)
+from ._veith_cytochrome_p450_2c19_inhibition_dataset import (
+    VeithCytochromeP4502C19InhibitionDataset,
+)
+from ._veith_cytochrome_p450_2d6_inhibition_dataset import (
+    VeithCytochromeP4502D6InhibitionDataset,
+)
+from ._veith_cytochrome_p450_3a4_inhibition_dataset import (
+    VeithCytochromeP4503A4InhibitionDataset,
+)
+from ._wang_effective_permeability_dataset import (
+    WangEffectivePermeabilityDataset,
+)
 
 __all__ = [
+    "AqSolDBDataset",
+    "AstraZenecaClearanceDataset",
+    "AstraZenecaLipophilicityDataset",
+    "AstraZenecaPlasmaProteinBindingRateDataset",
+    "BindingDBDataset",
+    "BroccatelliPGlycoproteinInhibitionDataset",
+    "CarbonMangelsCytochromeP4502C9SubstrateDataset",
+    "CarbonMangelsCytochromeP4502D6SubstrateDataset",
+    "CarbonMangelsCytochromeP4503A4SubstrateDataset",
+    "DAVISDataset",
+    "DisGeNETDataset",
+    "DrugCombDataset",
+    "FreeSolvDataset",
+    "GDSC1Dataset",
+    "GDSC2Dataset",
+    "HouHumanIntestinalAbsorptionDataset",
+    "HuRIDataset",
+    "KIBADataset",
+    "LombardoVolumeOfDistributionAtSteadyStateDataset",
+    "MaBioavailabilityDataset",
+    "MartinsBloodBrainBarrierDataset",
+    "ObachHalfLifeDataset",
+    "QM7Dataset",
+    "QM7bDataset",
+    "QM8Dataset",
+    "QM9Dataset",
     "RandomEulerAnglesDataset",
     "RandomRotationMatrixDataset",
     "RandomRotationQuaternionsDataset",
     "RandomRotationVectorDataset",
     "RandomTaitBryanAnglesDataset",
+    "SAbDabDataset",
+    "VeithCytochromeP4501A2InhibitionDataset",
+    "VeithCytochromeP4502C19InhibitionDataset",
+    "VeithCytochromeP4502C9InhibitionDataset",
+    "VeithCytochromeP4502D6InhibitionDataset",
+    "VeithCytochromeP4503A4InhibitionDataset",
+    "WangEffectivePermeabilityDataset",
 ]
