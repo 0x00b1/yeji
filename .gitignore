@@ -4,6 +4,7 @@
 *.so
 *~
 .coverage
+.hypothesis/
 .idea/
 .pytest_cache/
 .ruff_cache/
