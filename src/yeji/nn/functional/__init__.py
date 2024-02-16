@@ -1,75 +1,75 @@
-from ._euler_angles_to_rotation_matrix import euler_angles_to_rotation_matrix
-from ._euler_angles_to_rotation_quaternions import (
-    euler_angles_to_rotation_quaternions,
-)
-from ._euler_angles_to_rotation_vector import euler_angles_to_rotation_vector
-from ._euler_angles_to_tait_bryan_angles import (
-    euler_angles_to_tait_bryan_angles,
-)
-from ._rotation_matrix_to_euler_angles import rotation_matrix_to_euler_angles
-from ._rotation_matrix_to_rotation_quaternions import (
-    rotation_matrix_to_rotation_quaternions,
-)
-from ._rotation_matrix_to_rotation_vector import (
+from ._structure import (
+    apply_euler_angle_to_vector,
+    apply_rotation_matrix_to_vector,
+    apply_rotation_quaternion_to_vector,
+    apply_rotation_vector_to_vector,
+    apply_tait_bryan_angle_to_vector,
+    euler_angle_magnitude,
+    euler_angle_to_rotation_matrix,
+    euler_angle_to_rotation_quaternion,
+    euler_angle_to_rotation_vector,
+    euler_angle_to_tait_bryan_angle,
+    invert_euler_angle,
+    invert_rotation_matrix,
+    invert_rotation_quaternion,
+    invert_rotation_vector,
+    invert_tait_bryan_angles,
+    rotation_matrix_magnitude,
+    rotation_matrix_to_euler_angle,
+    rotation_matrix_to_rotation_quaternion,
     rotation_matrix_to_rotation_vector,
-)
-from ._rotation_matrix_to_tait_bryan_angles import (
-    rotation_matrix_to_tait_bryan_angles,
-)
-from ._rotation_quaternions_to_euler_angles import (
-    rotation_quaternions_to_euler_angles,
-)
-from ._rotation_quaternions_to_rotation_matrix import (
-    rotation_quaternions_to_rotation_matrix,
-)
-from ._rotation_quaternions_to_rotation_vector import (
-    rotation_quaternions_to_rotation_vector,
-)
-from ._rotation_quaternions_to_tait_bryan_angles import (
-    rotation_quaternions_to_tait_bryan_angles,
-)
-from ._rotation_vector_to_euler_angles import rotation_vector_to_euler_angles
-from ._rotation_vector_to_rotation_matrix import (
+    rotation_matrix_to_tait_bryan_angle,
+    rotation_quaternion_magnitude,
+    rotation_quaternion_to_euler_angle,
+    rotation_quaternion_to_rotation_matrix,
+    rotation_quaternion_to_rotation_vector,
+    rotation_quaternion_to_tait_bryan_angle,
+    rotation_vector_magnitude,
+    rotation_vector_to_euler_angle,
     rotation_vector_to_rotation_matrix,
-)
-from ._rotation_vector_to_rotation_quaternions import (
-    rotation_vector_to_rotation_quaternions,
-)
-from ._rotation_vector_to_tait_bryan_angles import (
-    rotation_vector_to_tait_bryan_angles,
-)
-from ._tait_bryan_angles_to_euler_angles import (
-    tait_bryan_angles_to_euler_angles,
-)
-from ._tait_bryan_angles_to_rotation_matrix import (
-    tait_bryan_angles_to_rotation_matrix,
-)
-from ._tait_bryan_angles_to_rotation_quaternions import (
-    tait_bryan_angles_to_rotation_quaternions,
-)
-from ._tait_bryan_angles_to_rotation_vector import (
-    tait_bryan_angles_to_rotation_vector,
+    rotation_vector_to_rotation_quaternion,
+    rotation_vector_to_tait_bryan_angle,
+    tait_bryan_angle_magnitude,
+    tait_bryan_angle_to_euler_angle,
+    tait_bryan_angle_to_rotation_matrix,
+    tait_bryan_angle_to_rotation_quaternion,
+    tait_bryan_angle_to_rotation_vector,
 )
 
 __all__ = [
-    "euler_angles_to_rotation_matrix",
-    "euler_angles_to_rotation_quaternions",
-    "euler_angles_to_rotation_vector",
-    "euler_angles_to_tait_bryan_angles",
-    "rotation_matrix_to_euler_angles",
-    "rotation_matrix_to_rotation_quaternions",
+    "apply_euler_angle_to_vector",
+    "apply_rotation_matrix_to_vector",
+    "apply_rotation_quaternion_to_vector",
+    "apply_rotation_vector_to_vector",
+    "apply_tait_bryan_angle_to_vector",
+    "euler_angle_magnitude",
+    "euler_angle_to_rotation_matrix",
+    "euler_angle_to_rotation_quaternion",
+    "euler_angle_to_rotation_vector",
+    "euler_angle_to_tait_bryan_angle",
+    "invert_euler_angle",
+    "invert_rotation_matrix",
+    "invert_rotation_quaternion",
+    "invert_rotation_vector",
+    "invert_tait_bryan_angles",
+    "rotation_matrix_magnitude",
+    "rotation_matrix_to_euler_angle",
+    "rotation_matrix_to_rotation_quaternion",
     "rotation_matrix_to_rotation_vector",
-    "rotation_matrix_to_tait_bryan_angles",
-    "rotation_quaternions_to_euler_angles",
-    "rotation_quaternions_to_rotation_matrix",
-    "rotation_quaternions_to_rotation_vector",
-    "rotation_quaternions_to_tait_bryan_angles",
-    "rotation_vector_to_euler_angles",
+    "rotation_matrix_to_tait_bryan_angle",
+    "rotation_quaternion_magnitude",
+    "rotation_quaternion_to_euler_angle",
+    "rotation_quaternion_to_rotation_matrix",
+    "rotation_quaternion_to_rotation_vector",
+    "rotation_quaternion_to_tait_bryan_angle",
+    "rotation_vector_magnitude",
+    "rotation_vector_to_euler_angle",
     "rotation_vector_to_rotation_matrix",
-    "rotation_vector_to_rotation_quaternions",
-    "rotation_vector_to_tait_bryan_angles",
-    "tait_bryan_angles_to_euler_angles",
-    "tait_bryan_angles_to_rotation_matrix",
-    "tait_bryan_angles_to_rotation_quaternions",
-    "tait_bryan_angles_to_rotation_vector",
+    "rotation_vector_to_rotation_quaternion",
+    "rotation_vector_to_tait_bryan_angle",
+    "tait_bryan_angle_magnitude",
+    "tait_bryan_angle_to_euler_angle",
+    "tait_bryan_angle_to_rotation_matrix",
+    "tait_bryan_angle_to_rotation_quaternion",
+    "tait_bryan_angle_to_rotation_vector",
 ]

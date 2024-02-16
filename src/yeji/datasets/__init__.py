@@ -1,4 +1,4 @@
-from ._aqsoldb_dataset import AqSolDBDataset
+from ._aqsoldb_solubility_dataset import AqSolDBSolubilityDataset
 from ._astrazeneca_clearance_dataset import AstraZenecaClearanceDataset
 from ._astrazeneca_lipophilicity_dataset import AstraZenecaLipophilicityDataset
 from ._astrazeneca_plasma_protein_binding_rate_dataset import (
@@ -72,7 +72,7 @@ from ._wang_effective_permeability_dataset import (
 )
 
 __all__ = [
-    "AqSolDBDataset",
+    "AqSolDBSolubilityDataset",
     "AstraZenecaClearanceDataset",
     "AstraZenecaLipophilicityDataset",
     "AstraZenecaPlasmaProteinBindingRateDataset",
