@@ -8,7 +8,7 @@ from yeji.features import TaitBryanAngles
 from ._transform import Transform
 
 
-class ToTaitBryanAngles(Transform):
+class ToTaitBryanAngle(Transform):
     _transformed_types = (Tensor,)
 
     def _transform(

@@ -8,7 +8,7 @@ from yeji.features import EulerAngles
 from ._transform import Transform
 
 
-class ToEulerAngles(Transform):
+class ToEulerAngle(Transform):
     _transformed_types = (Tensor,)
 
     def _transform(

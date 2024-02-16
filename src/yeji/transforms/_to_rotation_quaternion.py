@@ -8,7 +8,7 @@ from yeji.features import RotationQuaternions
 from ._transform import Transform
 
 
-class ToRotationQuaternions(Transform):
+class ToRotationQuaternion(Transform):
     _transformed_types = (Tensor,)
 
     def _transform(
