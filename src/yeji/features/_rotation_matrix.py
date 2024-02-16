@@ -5,7 +5,7 @@ from typing import Any, Optional, Union
 import torch
 from torch import Tensor
 
-from yeji.features._feature import Feature
+from ._feature import Feature
 
 
 class RotationMatrix(Feature):

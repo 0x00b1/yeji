@@ -3,7 +3,7 @@ from typing import Any, Dict
 from torch import Tensor
 
 import yeji.transforms.functional
-from yeji.features import RotationQuaternions
+from yeji.features import RotationQuaternion
 
 from ._transform import Transform
 
@@ -15,5 +15,5 @@ class ToRotationQuaternion(Transform):
         self,
         input: Tensor,
         parameters: Dict[str, Any],
-    ) -> RotationQuaternions:
+    ) -> RotationQuaternion:
         return yeji.transforms.functional.to_rotation_quaternions(input)

@@ -1,43 +1,43 @@
 import pytest
 import torch
 from torch import Size
-from yeji.features import TaitBryanAngles
+from yeji.features import TaitBryanAngle
 
 
 class TestTaitBryanAngles:
     @pytest.fixture
-    def tait_bryan_angles(self) -> TaitBryanAngles:
-        return TaitBryanAngles(torch.tensor([[1, 2, 3]]))
+    def tait_bryan_angles(self) -> TaitBryanAngle:
+        return TaitBryanAngle(torch.tensor([[1, 2, 3]]))
 
     def test___new__(self):
-        result = TaitBryanAngles(torch.tensor([[1, 2, 3]]))
+        result = TaitBryanAngle(torch.tensor([[1, 2, 3]]))
 
-        assert isinstance(result, TaitBryanAngles)
+        assert isinstance(result, TaitBryanAngle)
 
         assert result.shape == Size([1, 3])
 
         with pytest.raises(ValueError):
-            TaitBryanAngles(torch.tensor(5))
+            TaitBryanAngle(torch.tensor(5))
 
         with pytest.raises(ValueError):
-            TaitBryanAngles(torch.tensor([1, 2]))
+            TaitBryanAngle(torch.tensor([1, 2]))
 
-    def test___repr__(self, tait_bryan_angles: TaitBryanAngles):
+    def test___repr__(self, tait_bryan_angles: TaitBryanAngle):
         assert isinstance(tait_bryan_angles.__repr__(), str)
 
     def test__wrap(self):
-        result = TaitBryanAngles._wrap(torch.tensor([[1, 2, 3]]))
+        result = TaitBryanAngle._wrap(torch.tensor([[1, 2, 3]]))
 
-        assert isinstance(result, TaitBryanAngles)
+        assert isinstance(result, TaitBryanAngle)
 
         assert result.shape == Size([1, 3])
 
-    def test_wrap_like(self, tait_bryan_angles: TaitBryanAngles):
-        result = TaitBryanAngles.wrap_like(
+    def test_wrap_like(self, tait_bryan_angles: TaitBryanAngle):
+        result = TaitBryanAngle.wrap_like(
             tait_bryan_angles,
             torch.tensor([[1, 2, 3]]),
         )
 
-        assert isinstance(result, TaitBryanAngles)
+        assert isinstance(result, TaitBryanAngle)
 
         assert result.shape == Size([1, 3])

@@ -5,10 +5,10 @@ from typing import Any, Optional, Union
 import torch
 from torch import Tensor
 
-from yeji.features._feature import Feature
+from ._feature import Feature
 
 
-class EulerAngles(Feature):
+class EulerAngle(Feature):
     axes: str
     degrees: bool
 
@@ -19,7 +19,7 @@ class EulerAngles(Feature):
         *,
         axes: str = "xyz",
         degrees: bool = False,
-    ) -> EulerAngles:
+    ) -> EulerAngle:
         if tensor.ndim == 0:
             raise ValueError
 
@@ -29,13 +29,13 @@ class EulerAngles(Feature):
         if tensor.ndim == 1:
             tensor = torch.unsqueeze(tensor, 0)
 
-        euler_angles = tensor.as_subclass(cls)
+        euler_angle = tensor.as_subclass(cls)
 
-        euler_angles.axes = axes
+        euler_angle.axes = axes
 
-        euler_angles.degrees = degrees
+        euler_angle.degrees = degrees
 
-        return euler_angles
+        return euler_angle
 
     def __new__(
         cls,
@@ -46,7 +46,7 @@ class EulerAngles(Feature):
         dtype: Optional[torch.dtype] = None,
         device: Optional[Union[torch.device, str, int]] = None,
         requires_grad: Optional[bool] = None,
-    ) -> EulerAngles:
+    ) -> EulerAngle:
         tensor = cls._to_tensor(
             data,
             dtype=dtype,
@@ -60,8 +60,8 @@ class EulerAngles(Feature):
         return self._make_repr(axes=self.axes, degrees=self.degrees)
 
 
-_EulerAnglesType = Union[Tensor, EulerAngles]
-_EulerAnglesTypeJIT = Tensor
+_EulerAngleType = Union[Tensor, EulerAngle]
+_EulerAngleTypeJIT = Tensor
 
-_TensorEulerAnglesType = Union[Tensor, EulerAngles]
-_TensorEulerAnglesTypeJIT = Tensor
+_TensorEulerAngleType = Union[Tensor, EulerAngle]
+_TensorEulerAngleTypeJIT = Tensor
