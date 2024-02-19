@@ -9,6 +9,10 @@ from ._feature import Feature
 
 
 class RotationVector(Feature):
+    """
+    Rotation vector.
+    """
+
     degrees: bool
 
     @classmethod

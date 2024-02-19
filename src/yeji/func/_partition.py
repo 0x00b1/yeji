@@ -1,0 +1,2 @@
+def partition():
+    raise NotImplementedError

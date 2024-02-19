@@ -23,6 +23,10 @@ F = TypeVar("F", bound="Feature")
 
 
 class Feature(Tensor):
+    """
+    Feature
+    """
+
     __f: Optional[ModuleType] = None
 
     @staticmethod

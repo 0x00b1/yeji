@@ -9,6 +9,10 @@ from ._feature import Feature
 
 
 class RotationQuaternion(Feature):
+    """
+    Rotation quaternion.
+    """
+
     @classmethod
     def _wrap(cls, tensor: Tensor) -> RotationQuaternion:
         return tensor.as_subclass(cls)

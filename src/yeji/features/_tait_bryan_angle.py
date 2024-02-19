@@ -9,6 +9,10 @@ from ._feature import Feature
 
 
 class TaitBryanAngle(Feature):
+    """
+    Tait-Bryan angle.
+    """
+
     axes: str
     degrees: bool
 

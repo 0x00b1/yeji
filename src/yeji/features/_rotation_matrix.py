@@ -9,6 +9,10 @@ from ._feature import Feature
 
 
 class RotationMatrix(Feature):
+    """
+    Rotation matrix.
+    """
+
     @classmethod
     def _wrap(cls, tensor: Tensor) -> RotationMatrix:
         return tensor.as_subclass(cls)

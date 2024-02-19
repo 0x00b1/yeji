@@ -9,6 +9,10 @@ from ._feature import Feature
 
 
 class EulerAngle(Feature):
+    """
+    Euler angle.
+    """
+
     axes: str
     degrees: bool
 
