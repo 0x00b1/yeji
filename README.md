@@ -13,7 +13,7 @@ A standard library for biological research.
         *   yeji.lightning.datamodules:
     *   yeji.metrics:
         *   yeji.metrics.functional:
-    *   yeji.nn`:
+    *   yeji.nn:
         *   yeji.nn.functional:
     *   yeji.optim: 
     *   yeji.samplers: 
