@@ -6,7 +6,7 @@ A [PyTorch](https://pytorch.org/)-based standard library for biological research
 
 ## Features
 
-*   yeji
+*   yeji: general-purpose PyTorch operators.
     *   yeji.datasets:
     *   yeji.func:
     *   yeji.lightning:
@@ -15,7 +15,7 @@ A [PyTorch](https://pytorch.org/)-based standard library for biological research
         *   yeji.metrics.functional:
     *   yeji.nn:
         *   yeji.nn.functional:
-    *   yeji.optim:
+    *   yeji.optim: 
     *   yeji.samplers: 
     *   yeji.transforms: 
         *   yeji.transforms.functional:
