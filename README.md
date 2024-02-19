@@ -8,7 +8,7 @@ A standard library for biological research.
 
 *   `yeji`: general-purpose PyTorch operators.
     *   `yeji.datasets`:
-    *   `yeji.func`:
+    *   `yeji.func`: composable PyTorch function transforms.
     *   `yeji.lightning`:
         *   `yeji.lightning.datamodules`:
     *   `yeji.metrics`:
