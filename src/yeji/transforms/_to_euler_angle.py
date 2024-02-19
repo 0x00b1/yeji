@@ -3,7 +3,7 @@ from typing import Any, Dict
 from torch import Tensor
 
 import yeji.transforms.functional
-from yeji.features import EulerAngles
+from yeji.features import EulerAngle
 
 from ._transform import Transform
 
@@ -15,5 +15,5 @@ class ToEulerAngle(Transform):
         self,
         input: Tensor,
         parameters: Dict[str, Any],
-    ) -> EulerAngles:
+    ) -> EulerAngle:
         return yeji.transforms.functional.to_euler_angles(input, **parameters)
