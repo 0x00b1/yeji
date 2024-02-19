@@ -4,7 +4,7 @@
 
 A standard library for biological research.
 
-## Features
+## Package Structure
 
 *   yeji: general-purpose PyTorch operators.
     *   yeji.datasets:
