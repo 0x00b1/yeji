@@ -4,6 +4,16 @@
 
 A standard library for biological research.
 
+## Features
+
+## Installation
+
+```bash
+pip install yeji
+```
+
+_Requires Python 3.10 or later and PyTorch 2.2.0 or later._
+
 ## Package Structure
 
 *   yeji: general-purpose PyTorch operators.
@@ -19,11 +29,3 @@ A standard library for biological research.
     *   yeji.samplers: 
     *   yeji.transforms: 
         *   yeji.transforms.functional:
-
-## Installation
-
-```bash
-pip install yeji
-```
-
-_Requires Python 3.10 or later and PyTorch 2.2.0 or later._
