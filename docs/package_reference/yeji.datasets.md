@@ -1,6 +1,8 @@
 # yeji.datasets
 
-## ::: yeji.datasets.AqSolDBSolubilityDataset
+## Absorption
+
+### ::: yeji.datasets.AqSolDBSolubilityDataset
     options:
         inherited_members:
             - __getitem__
@@ -10,7 +12,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.AstraZenecaClearanceDataset
+### ::: yeji.datasets.AstraZenecaLipophilicityDataset
     options:
         inherited_members:
             - __getitem__
@@ -20,7 +22,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.AstraZenecaLipophilicityDataset
+### ::: yeji.datasets.BroccatelliPGlycoproteinInhibitionDataset
     options:
         inherited_members:
             - __getitem__
@@ -30,7 +32,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.AstraZenecaPlasmaProteinBindingRateDataset
+### ::: yeji.datasets.FreeSolvDataset
     options:
         inherited_members:
             - __getitem__
@@ -40,7 +42,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.BindingDBDataset
+### ::: yeji.datasets.HouHumanIntestinalAbsorptionDataset
     options:
         inherited_members:
             - __getitem__
@@ -50,7 +52,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.BroccatelliPGlycoproteinInhibitionDataset
+### ::: yeji.datasets.MaBioavailabilityDataset
     options:
         inherited_members:
             - __getitem__
@@ -60,7 +62,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.CarbonMangelsCytochromeP4502C9SubstrateDataset
+### ::: yeji.datasets.WangEffectivePermeabilityDataset
     options:
         inherited_members:
             - __getitem__
@@ -70,7 +72,9 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.CarbonMangelsCytochromeP4502D6SubstrateDataset
+## Antibody Affinity
+
+### ::: yeji.datasets.SAbDabDataset
     options:
         inherited_members:
             - __getitem__
@@ -80,7 +84,11 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.CarbonMangelsCytochromeP4503A4SubstrateDataset
+## Catalyst
+
+## Distribution
+
+### ::: yeji.datasets.AstraZenecaPlasmaProteinBindingRateDataset
     options:
         inherited_members:
             - __getitem__
@@ -90,7 +98,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.ChEMBLDataset
+### ::: yeji.datasets.LombardoVolumeOfDistributionAtSteadyStateDataset
     options:
         inherited_members:
             - __getitem__
@@ -100,7 +108,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.DAVISDataset
+### ::: yeji.datasets.MartinsBloodBrainBarrierDataset
     options:
         inherited_members:
             - __getitem__
@@ -110,7 +118,11 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.DisGeNETDataset
+## Drug Interaction
+
+## Drug Intolerance
+
+### ::: yeji.datasets.BindingDBDataset
     options:
         inherited_members:
             - __getitem__
@@ -120,7 +132,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.DrugCombDataset
+### ::: yeji.datasets.DAVISDataset
     options:
         inherited_members:
             - __getitem__
@@ -130,7 +142,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.FreeSolvDataset
+### ::: yeji.datasets.KIBADataset
     options:
         inherited_members:
             - __getitem__
@@ -140,7 +152,9 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.GDSC1Dataset
+## Drug Response
+
+### ::: yeji.datasets.GDSC1Dataset
     options:
         inherited_members:
             - __getitem__
@@ -150,7 +164,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.GDSC2Dataset
+### ::: yeji.datasets.GDSC2Dataset
     options:
         inherited_members:
             - __getitem__
@@ -160,7 +174,9 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.HouHumanIntestinalAbsorptionDataset
+## Drug Synergism
+
+### ::: yeji.datasets.DrugCombDataset
     options:
         inherited_members:
             - __getitem__
@@ -170,7 +186,11 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.HuRIDataset
+## Epitope
+
+## Execretion
+
+### ::: yeji.datasets.AstraZenecaClearanceDataset
     options:
         inherited_members:
             - __getitem__
@@ -180,7 +200,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.KIBADataset
+### ::: yeji.datasets.ObachHalfLifeDataset
     options:
         inherited_members:
             - __getitem__
@@ -190,7 +210,9 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.LombardoVolumeOfDistributionAtSteadyStateDataset
+## Gene-Disease Association
+
+### ::: yeji.datasets.DisGeNETDataset
     options:
         inherited_members:
             - __getitem__
@@ -200,7 +222,9 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.MOSESDataset
+## Metabolism
+
+### ::: yeji.datasets.CarbonMangelsCytochromeP4502C9SubstrateDataset
     options:
         inherited_members:
             - __getitem__
@@ -210,7 +234,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.MaBioavailabilityDataset
+### ::: yeji.datasets.CarbonMangelsCytochromeP4502D6SubstrateDataset
     options:
         inherited_members:
             - __getitem__
@@ -220,7 +244,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.MartinsBloodBrainBarrierDataset
+### ::: yeji.datasets.CarbonMangelsCytochromeP4503A4SubstrateDataset
     options:
         inherited_members:
             - __getitem__
@@ -230,7 +254,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.ObachHalfLifeDataset
+### ::: yeji.datasets.VeithCytochromeP4501A2InhibitionDataset
     options:
         inherited_members:
             - __getitem__
@@ -240,7 +264,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.PDBbindDataset
+### ::: yeji.datasets.VeithCytochromeP4502C19InhibitionDataset
     options:
         inherited_members:
             - __getitem__
@@ -250,7 +274,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.QM7Dataset
+### ::: yeji.datasets.VeithCytochromeP4502C9InhibitionDataset
     options:
         inherited_members:
             - __getitem__
@@ -260,7 +284,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.QM7bDataset
+### ::: yeji.datasets.VeithCytochromeP4502D6InhibitionDataset
     options:
         inherited_members:
             - __getitem__
@@ -270,7 +294,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.QM8Dataset
+### ::: yeji.datasets.VeithCytochromeP4503A4InhibitionDataset
     options:
         inherited_members:
             - __getitem__
@@ -280,7 +304,9 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.QM9Dataset
+## Molecule
+
+### ::: yeji.datasets.ChEMBLDataset
     options:
         inherited_members:
             - __getitem__
@@ -290,7 +316,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.REALDatabaseDataset
+### ::: yeji.datasets.MOSESDataset
     options:
         inherited_members:
             - __getitem__
@@ -300,7 +326,15 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.RandomEulerAngleDataset
+## Protein Property
+
+## Protein Sequence
+
+## Protein Structure
+
+## Protein–Protein Interaction
+
+### ::: yeji.datasets.HuRIDataset
     options:
         inherited_members:
             - __getitem__
@@ -310,7 +344,9 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.RandomRotationMatrixDataset
+## Quantum Mechanics
+
+### ::: yeji.datasets.QM7Dataset
     options:
         inherited_members:
             - __getitem__
@@ -320,7 +356,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.RandomRotationQuaternionDataset
+### ::: yeji.datasets.QM7bDataset
     options:
         inherited_members:
             - __getitem__
@@ -330,7 +366,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.RandomRotationVectorDataset
+### ::: yeji.datasets.QM8Dataset
     options:
         inherited_members:
             - __getitem__
@@ -340,7 +376,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.RandomTaitBryanAngleDataset
+### ::: yeji.datasets.QM9Dataset
     options:
         inherited_members:
             - __getitem__
@@ -350,7 +386,11 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.SAbDabDataset
+## Reaction
+
+## Rotation
+
+### ::: yeji.datasets.RandomEulerAngleDataset
     options:
         inherited_members:
             - __getitem__
@@ -360,7 +400,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.VeithCytochromeP4501A2InhibitionDataset
+### ::: yeji.datasets.RandomRotationMatrixDataset
     options:
         inherited_members:
             - __getitem__
@@ -370,7 +410,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.VeithCytochromeP4502C19InhibitionDataset
+### ::: yeji.datasets.RandomRotationQuaternionDataset
     options:
         inherited_members:
             - __getitem__
@@ -380,7 +420,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.VeithCytochromeP4502C9InhibitionDataset
+### ::: yeji.datasets.RandomRotationVectorDataset
     options:
         inherited_members:
             - __getitem__
@@ -390,7 +430,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.VeithCytochromeP4502D6InhibitionDataset
+### ::: yeji.datasets.RandomTaitBryanAngleDataset
     options:
         inherited_members:
             - __getitem__
@@ -400,7 +440,9 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.VeithCytochromeP4503A4InhibitionDataset
+## Toxicity
+
+### ::: yeji.datasets.PDBbindDataset
     options:
         inherited_members:
             - __getitem__
@@ -410,7 +452,7 @@
             - __getitem__
             - __len__
 
-## ::: yeji.datasets.WangEffectivePermeabilityDataset
+### ::: yeji.datasets.REALDatabaseDataset
     options:
         inherited_members:
             - __getitem__

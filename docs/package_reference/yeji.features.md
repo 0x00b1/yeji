@@ -1,11 +1,13 @@
 # yeji.features
 
-## ::: yeji.features.EulerAngle
+## Rotation Features
 
-## ::: yeji.features.RotationMatrix
+### ::: yeji.features.EulerAngle
 
-## ::: yeji.features.RotationQuaternion
+### ::: yeji.features.RotationMatrix
 
-## ::: yeji.features.RotationVector
+### ::: yeji.features.RotationQuaternion
 
-## ::: yeji.features.TaitBryanAngle
+### ::: yeji.features.RotationVector
+
+### ::: yeji.features.TaitBryanAngle
