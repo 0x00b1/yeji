@@ -4,42 +4,6 @@ from ._transform import Transform
 
 
 class Compose(Transform):
-    """
-    Composes transforms.
-
-    Args:
-        transforms (sequence of ``Transform`` objects): sequence of transforms
-        to compose.
-
-    Example
-    -------
-    >>> from yeji.transforms import Compose, Identity
-    >>>
-    >>> Compose([
-    >>>     Identity(),
-    >>>     Identity(),
-    >>>     Identity(),
-    >>> ])
-
-    Note
-    ----
-    Use ``torch.nn.Sequential`` to compile transforms.
-
-        >>> from torch.nn import Sequential
-        >>> import torch
-        >>>
-        >>> from yeji.transforms import Identity
-        >>>
-        >>> transforms = Sequential(
-        >>>     Identity(),
-        >>>     Identity(),
-        >>> )
-        >>>
-        >>> compiled_transforms = torch.compile(transforms)
-
-    Ensure only compilable transforms are used.
-    """
-
     def __init__(self, transforms: Sequence[Callable]):
         """
         Parameters

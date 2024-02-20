@@ -1,3 +1,0 @@
-# yeji
-
-## Rotations

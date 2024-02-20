@@ -3,7 +3,7 @@ from __future__ import annotations
 from torch.utils.data import Dataset
 
 
-class RandomRotationQuaternionsDataset(Dataset):
+class RandomTaitBryanAngleDataset(Dataset):
     def __init__(self):
         raise NotImplementedError
 

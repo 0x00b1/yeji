@@ -1,60 +1,56 @@
-theme:
-    name: "material"
-edit_uri: ""  # No edit button, as some of our pages are in /docs and some in /examples via symlink, so it's impossible for them all to be accurate
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - toc:
+      toc_depth: 3
+plugins:
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          options:
+            docstring_section_style: list
+            docstring_style: numpy
+            heading_level: 3
+            line_length: 39
+            merge_init_into_class: true
+            parameter_headings: false
+            separate_signature: true
+            show_bases: false
+            show_root_full_path: false
+            show_root_heading: true
+            show_root_toc_entry: true
+            show_signature_annotations: true
+            show_source: false
+            signature_crossrefs: true
 repo_name: "0x00b1/yeji"
 repo_url: "https://github.com/0x00b1/yeji"
 site_author: "Allen Goodman"
 site_description: "Yeji (예지): A standard library for biological research."
 site_name: "Yeji (예지)"
-strict: true  # Don't allow warnings during the build process
-markdown_extensions:
-    - pymdownx.arithmatex:
-        generic: true
-extra_javascript:
-  - javascripts/mathjax.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-plugins:
-    - search  # default search plugin; needs manually re-enabling when using any other plugins
-    - autorefs  # Cross-links to headings
-    - include_exclude_files:
-        include:
-        exclude:
-            - "_overrides"
-            - "_static/README.md"
-    - mknotebooks  # Jupyter notebooks
-    - mkdocstrings:
-        handlers:
-            python:
-                setup_commands:
-                    - import pytkdocs_tweaks
-                    - pytkdocs_tweaks.main()
-                selection:
-                    inherited_members: true  # Allow looking up inherited methods
-                rendering:
-                    show_root_heading: true  # actually display anything at all...
-                    show_root_full_path: true  # display "diffrax.asdf" not just "asdf"
-                    show_if_no_docstring: true
-                    show_signature_annotations: true
-                    show_source: false  # don't include source code
-                    members_order: source  # order methods according to their order of definition in the source code, not alphabetical order
-                    heading_level: 4  # Makes everything top-level be <h4>. Child entries will be <h5> etc., but because of toc_depth, above, (deliberately) won't appear in the TOC.
+strict: true
+theme:
+  name: "material"
 nav:
-    - "index.md"
-    - Package:
-        - "package/yeji.md"
-        - "package/yeji.constants.md"
-        - "package/yeji.datasets.md"
-        - "package/yeji.features.md"
-        - "package/yeji.func.md"
-        - "package/yeji.io.md"
-        - "package/yeji.lightning.md"
-        - "package/yeji.lightning.datamodules.md"
-        - "package/yeji.metrics.md"
-        - "package/yeji.metrics.functional.md"
-        - "package/yeji.nn.md"
-        - "package/yeji.nn.functional.md"
-        - "package/yeji.optim.md"
-        - "package/yeji.samplers.md"
-        - "package/yeji.transforms.md"
-        - "package/yeji.transforms.functional.md"
+  - "index.md"
+  - "Package Reference":
+    - "package_reference/yeji.md"
+    - "package_reference/yeji.constants.md"
+    - "package_reference/yeji.datasets.md"
+    - "package_reference/yeji.features.md"
+    - "package_reference/yeji.func.md"
+    - "package_reference/yeji.io.md"
+    - "package_reference/yeji.lightning.md"
+    - "package_reference/yeji.lightning.datamodules.md"
+    - "package_reference/yeji.metrics.md"
+    - "package_reference/yeji.metrics.functional.md"
+    - "package_reference/yeji.nn.md"
+    - "package_reference/yeji.nn.functional.md"
+    - "package_reference/yeji.optim.md"
+    - "package_reference/yeji.samplers.md"
+    - "package_reference/yeji.transforms.md"
+    - "package_reference/yeji.transforms.functional.md"

@@ -5,6 +5,13 @@ from .__tdc_dataset import _TDCDataset
 
 class DisGeNETDataset(_TDCDataset):
     def __init__(self, root: str | Path, download: bool = False):
+        r"""
+
+        Parameters
+        ----------
+        root
+        download
+        """
         super().__init__(
             root=root,
             download=download,

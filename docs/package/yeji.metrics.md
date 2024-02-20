@@ -1,3 +1,0 @@
-# yeji.metrics
-
-## Protein Properties

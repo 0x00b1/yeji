@@ -43,13 +43,13 @@ from ._qm7_dataset import QM7Dataset
 from ._qm7b_dataset import QM7bDataset
 from ._qm8_dataset import QM8Dataset
 from ._qm9_dataset import QM9Dataset
-from ._random_euler_angles_dataset import RandomEulerAnglesDataset
+from ._random_euler_angle_dataset import RandomEulerAngleDataset
 from ._random_rotation_matrix_dataset import RandomRotationMatrixDataset
-from ._random_rotation_quaternions_dataset import (
-    RandomRotationQuaternionsDataset,
+from ._random_rotation_quaternion_dataset import (
+    RandomRotationQuaternionDataset,
 )
 from ._random_rotation_vector_dataset import RandomRotationVectorDataset
-from ._random_tait_bryan_angles_dataset import RandomTaitBryanAnglesDataset
+from ._random_tait_bryan_angle_dataset import RandomTaitBryanAngleDataset
 from ._real_database_dataset import REALDatabaseDataset
 from ._sabdab_dataset import SAbDabDataset
 from ._veith_cytochrome_p450_1a2_inhibition_dataset import (
@@ -102,11 +102,11 @@ __all__ = [
     "QM8Dataset",
     "QM9Dataset",
     "REALDatabaseDataset",
-    "RandomEulerAnglesDataset",
+    "RandomEulerAngleDataset",
     "RandomRotationMatrixDataset",
-    "RandomRotationQuaternionsDataset",
+    "RandomRotationQuaternionDataset",
     "RandomRotationVectorDataset",
-    "RandomTaitBryanAnglesDataset",
+    "RandomTaitBryanAngleDataset",
     "SAbDabDataset",
     "VeithCytochromeP4501A2InhibitionDataset",
     "VeithCytochromeP4502C19InhibitionDataset",

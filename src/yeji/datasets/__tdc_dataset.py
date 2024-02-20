@@ -38,24 +38,24 @@ class _TDCDataset(Dataset):
 
         match path.suffix:
             case ".csv":
-                self.data = pandas.read_csv(path)
+                self._data = pandas.read_csv(path)
             case ".pkl":
-                self.data = pandas.read_pickle(path)
+                self._data = pandas.read_pickle(path)
             case ".tsv":
-                self.data = pandas.read_csv(path, sep="\t")
+                self._data = pandas.read_csv(path, sep="\t")
             case _:
                 raise ValueError
 
-        self.xs = self.data[x_columns].apply(tuple, axis=1)
-        self.ys = self.data[y_columns].apply(tuple, axis=1)
+        self._xs = self._data[x_columns].apply(tuple, axis=1)
+        self._ys = self._data[y_columns].apply(tuple, axis=1)
 
     def __getitem__(self, index: int):
-        x = self.xs[index]
+        x = self._xs[index]
 
         if len(x) == 1:
             x = x[0]
 
-        y = self.ys[index]
+        y = self._ys[index]
 
         if len(y) == 1:
             y = y[0]
@@ -63,4 +63,4 @@ class _TDCDataset(Dataset):
         return x, y
 
     def __len__(self) -> int:
-        return len(self.data)
+        return len(self._data)
