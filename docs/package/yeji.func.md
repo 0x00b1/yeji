@@ -1,5 +1,7 @@
 # yeji.func
 
+Composable PyTorch function transforms.
+
 ## Molecular Dynamics
 
 ### ::: yeji.func.force
@@ -27,5 +29,3 @@
     options:
         docstring_style: numpy
         show_root_heading: true
-
-foofoo
