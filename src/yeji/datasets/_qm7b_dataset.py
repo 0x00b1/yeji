@@ -27,8 +27,10 @@ class QM7bDataset(Dataset):
             already exists, it is not redownloaded. Default, `False`.
 
         transform_fn : Callable | Transform | None
+            Transforms the input.
 
         target_transform_fn : Callable | Transform | None
+            Transforms the target.
         """
         raise NotImplementedError
 
