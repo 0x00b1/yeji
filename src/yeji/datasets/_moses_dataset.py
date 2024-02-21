@@ -10,8 +10,8 @@ class MOSESDataset(Dataset):
     def __init__(
         self,
         root: str | Path,
-        download: bool = False,
         *,
+        download: bool = False,
         transform_fn: Callable | Transform | None = None,
         target_transform_fn: Callable | Transform | None = None,
     ):

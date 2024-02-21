@@ -1,7 +1,8 @@
 from pathlib import Path
 from typing import Callable
 
-from ..transforms import Transform
+from yeji.transforms import Transform
+
 from .__tdc_dataset import _TDCDataset
 
 
@@ -9,8 +10,8 @@ class AqSolDBSolubilityDataset(_TDCDataset):
     def __init__(
         self,
         root: str | Path,
-        download: bool = False,
         *,
+        download: bool = False,
         transform_fn: Callable | Transform | None = None,
         target_transform_fn: Callable | Transform | None = None,
     ):

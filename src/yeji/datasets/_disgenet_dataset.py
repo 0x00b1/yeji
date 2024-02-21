@@ -1,10 +1,20 @@
 from pathlib import Path
+from typing import Callable
+
+from yeji.transforms import Transform
 
 from .__tdc_dataset import _TDCDataset
 
 
 class DisGeNETDataset(_TDCDataset):
-    def __init__(self, root: str | Path, download: bool = False):
+    def __init__(
+        self,
+        root: str | Path,
+        *,
+        download: bool = False,
+        transform_fn: Callable | Transform | None = None,
+        target_transform_fn: Callable | Transform | None = None,
+    ):
         r"""
 
         Parameters

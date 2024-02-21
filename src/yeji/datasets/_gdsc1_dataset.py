@@ -1,7 +1,8 @@
 from pathlib import Path
 from typing import Callable
 
-from ..transforms import Transform
+from yeji.transforms import Transform
+
 from .__tdc_dataset import _TDCDataset
 
 

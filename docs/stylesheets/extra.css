@@ -1,0 +1,14 @@
+body > div.md-container > main > div > div.md-sidebar.md-sidebar--secondary > div > div > nav > ul > li > nav > ul {
+    padding-left: 0 !important;
+}
+
+body > div.md-container > main > div > div.md-sidebar.md-sidebar--secondary > div > div > nav > ul > li > a > span {
+    align-items: flex-start;
+    color: var(--md-default-fg-color--light);
+    display: flex;
+    font-weight: 700;
+    gap: 0.4rem;
+    margin-top: 0.625em;
+    scroll-snap-align: start;
+    transition: color 125ms;
+}

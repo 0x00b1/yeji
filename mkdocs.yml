@@ -1,3 +1,5 @@
+extra_css:
+  - stylesheets/extra.css
 extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
@@ -7,6 +9,7 @@ markdown_extensions:
       generic: true
   - toc:
       toc_depth: 3
+      title: "&nbsp;"
 plugins:
   - mkdocstrings:
       default_handler: python
@@ -34,6 +37,8 @@ site_description: "Yeji (예지): A standard library for biological research."
 site_name: "Yeji (예지)"
 strict: true
 theme:
+  features:
+    - navigation.sections
   name: "material"
 nav:
   - "index.md"

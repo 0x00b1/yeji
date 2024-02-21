@@ -1,11 +1,20 @@
 from pathlib import Path
-from typing import Any, Union
+from typing import Any, Callable
+
+from yeji.transforms import Transform
 
 from ._sequence_dataset import SequenceDataset
 
 
 class Uniclust50Dataset(SequenceDataset):
-    def __init__(self, root: Union[str, Path]) -> None:
+    def __init__(
+        self,
+        root: str | Path,
+        *,
+        download: bool = False,
+        transform_fn: Callable | Transform | None = None,
+        target_transform_fn: Callable | Transform | None = None,
+    ):
         super().__init__(root)
 
     def __getitem__(self, index: int) -> Any:
