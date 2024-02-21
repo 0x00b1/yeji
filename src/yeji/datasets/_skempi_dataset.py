@@ -2,11 +2,11 @@ import os.path
 from pathlib import Path
 from typing import Callable, Union
 
-import prescient.io
 import torch
 from Bio.PDB import PDBParser
 from torch import Tensor
 
+import yeji.io
 from yeji.transforms import Transform
 
 from ._parquet_dataset import ParquetDataset
@@ -56,13 +56,13 @@ class SKEMPIDataset(ParquetDataset):
         self._root = root
 
         if download:
-            prescient.io.download(
+            yeji.io.download(
                 source="s3://prescient-data-dev/designdb/lake/thirdparty/skempi/cc5952a4a37f4f1fbe14ce484a00eb87_0.snappy.parquet",
                 destination=self._root / "SKEMPI-v2.0",
                 filename="SKEMPI-v2.0.parquet",
             )
 
-            prescient.io.download_and_extract_archive(
+            yeji.io.download_and_extract_archive(
                 resource="https://life.bsc.es/pid/skempi2/database/download/SKEMPI2_PDBs.tgz",
                 source=self._root,
                 destination=self._root,

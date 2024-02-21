@@ -4,8 +4,9 @@ from io import BytesIO
 from pathlib import Path
 from typing import Any, Callable, Dict, Union
 
-from prescient.transforms import Transform
 from torch.utils.data import Dataset
+
+from yeji.transforms import Transform
 
 try:
     import lmdb

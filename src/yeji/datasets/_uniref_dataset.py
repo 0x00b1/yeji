@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from typing import Callable, Optional, Union
 
-from prescient.io import download_and_extract_archive
+import yeji.io
 
 from ._fasta_dataset import FASTADataset
 
@@ -49,7 +49,7 @@ class UniRefDataset(FASTADataset):
         path = directory / f"{name}.fasta"
 
         if download and not os.path.exists(path):
-            download_and_extract_archive(
+            yeji.io.download_and_extract_archive(
                 f"http://ftp.uniprot.org/pub/databases/uniprot/uniref/{name}/{name}.fasta.gz",
                 str(directory),
                 str(directory),

@@ -3,7 +3,8 @@ from pathlib import Path
 from typing import Callable, Optional, Tuple, Union
 
 import numpy
-from prescient.io._thread_safe_file import ThreadSafeFile
+
+from yeji.io import ThreadSafeFile
 
 from ._sized_sequence_dataset import SizedSequenceDataset
 

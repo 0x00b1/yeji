@@ -1,8 +1,7 @@
 from pathlib import Path
 from typing import Callable, Optional, Union
 
-import prescient.io
-
+import yeji.io
 from yeji.transforms import Transform
 
 from ._lmdb_dataset import LMDBDataset
@@ -28,7 +27,7 @@ class ATOM3DDataset(LMDBDataset):
         self._transform_fn = transform_fn
 
         if download:
-            prescient.io.download_and_extract_archive(
+            yeji.io.download_and_extract_archive(
                 resource,
                 self._root / f"ATOM3D{name}",
                 checksum=checksum,
