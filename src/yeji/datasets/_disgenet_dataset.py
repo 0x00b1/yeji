@@ -40,5 +40,6 @@ class DisGeNETDataset(_TDCDataset):
             checksum="md5:b7efdf1dc006ff04a33bb3a4aec5d746",
             x_columns=["X1", "ID2"],
             y_columns=["Y"],
-            sep=",",
+            transform_fn=transform_fn,
+            target_transform_fn=target_transform_fn,
         )

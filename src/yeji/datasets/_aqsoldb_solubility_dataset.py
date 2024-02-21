@@ -35,8 +35,11 @@ class AqSolDBSolubilityDataset(_TDCDataset):
         super().__init__(
             root=root,
             download=download,
-            identifier="https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/OVHAW8/RLVXZU",
+            identifier=0,
             suffix="curated-solubility-dataset.tab",
             checksum="5370aa67615adb2f11806ed1aaed37c2bf91e634d36ebaf40509c16d5cede8a0",
-            x_columns=["SMILES", "Solubility"],
+            x_columns=["SMILES"],
+            y_columns=["Solubility"],
+            transform_fn=transform_fn,
+            target_transform_fn=target_transform_fn,
         )

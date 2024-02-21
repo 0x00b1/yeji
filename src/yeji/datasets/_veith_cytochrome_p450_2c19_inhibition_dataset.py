@@ -40,4 +40,6 @@ class VeithCytochromeP4502C19InhibitionDataset(_TDCDataset):
             checksum="md5:fe0c4420effb5df2417fa9c9a2ba07ae",
             x_columns=["Drug"],
             y_columns=["Y"],
+            transform_fn=transform_fn,
+            target_transform_fn=target_transform_fn,
         )
