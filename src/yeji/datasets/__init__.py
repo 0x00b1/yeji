@@ -23,6 +23,7 @@ from ._carbon_mangels_cytochrome_p450_3a4_substrate_dataset import (
     CarbonMangelsCytochromeP4503A4SubstrateDataset,
 )
 from ._chembl_dataset import ChEMBLDataset
+from ._clintox_dataset import ClinToxDataset
 from ._davis_dataset import DAVISDataset
 from ._disgenet_dataset import DisGeNETDataset
 from ._drugcomb_dataset import DrugCombDataset
@@ -42,6 +43,7 @@ from ._martins_blood_brain_barrier_dataset import (
     MartinsBloodBrainBarrierDataset,
 )
 from ._moses_dataset import MOSESDataset
+from ._ncats_pampa_permeability_dataset import NCATSPAMPAPermeabilityDataset
 from ._obach_half_life_dataset import ObachHalfLifeDataset
 from ._pdbbind_dataset import PDBbindDataset
 from ._qm7_dataset import QM7Dataset
@@ -66,6 +68,7 @@ from ._uniclust90_dataset import Uniclust90Dataset
 from ._uniref50_dataset import UniRef50Dataset
 from ._uniref90_dataset import UniRef90Dataset
 from ._uniref100_dataset import UniRef100Dataset
+from ._uspto_reaction_product_dataset import USPTOReactionProductDataset
 from ._veith_cytochrome_p450_1a2_inhibition_dataset import (
     VeithCytochromeP4501A2InhibitionDataset,
 )
@@ -84,6 +87,7 @@ from ._veith_cytochrome_p450_3a4_inhibition_dataset import (
 from ._wang_effective_permeability_dataset import (
     WangEffectivePermeabilityDataset,
 )
+from ._zhu_acute_toxicity_ld50_dataset import ZhuAcuteToxicityLD50Dataset
 from ._zinc_dataset import ZINCDataset
 
 __all__ = [
@@ -102,6 +106,7 @@ __all__ = [
     "CarbonMangelsCytochromeP4502D6SubstrateDataset",
     "CarbonMangelsCytochromeP4503A4SubstrateDataset",
     "ChEMBLDataset",
+    "ClinToxDataset",
     "DAVISDataset",
     "DisGeNETDataset",
     "DrugCombDataset",
@@ -115,6 +120,7 @@ __all__ = [
     "MOSESDataset",
     "MaBioavailabilityDataset",
     "MartinsBloodBrainBarrierDataset",
+    "NCATSPAMPAPermeabilityDataset",
     "ObachHalfLifeDataset",
     "PDBbindDataset",
     "QM7Dataset",
@@ -131,6 +137,7 @@ __all__ = [
     "SKEMPIDataset",
     "Tox21Dataset",
     "ToxCastDataset",
+    "USPTOReactionProductDataset",
     "UniRef100Dataset",
     "UniRef50Dataset",
     "UniRef90Dataset",
@@ -144,4 +151,5 @@ __all__ = [
     "VeithCytochromeP4503A4InhibitionDataset",
     "WangEffectivePermeabilityDataset",
     "ZINCDataset",
+    "ZhuAcuteToxicityLD50Dataset",
 ]
