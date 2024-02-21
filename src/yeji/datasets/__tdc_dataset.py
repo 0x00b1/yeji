@@ -1,8 +1,11 @@
 from pathlib import Path
+from typing import Callable
 
 import pandas
 import pooch
 from torch.utils.data import Dataset
+
+from yeji.transforms import Transform
 
 
 class _TDCDataset(Dataset):
@@ -16,6 +19,8 @@ class _TDCDataset(Dataset):
         checksum: str,
         x_columns: list[str],
         y_columns: list[str],
+        transform_fn: Callable | Transform | None = None,
+        target_transform_fn: Callable | Transform | None = None,
     ):
         super().__init__()
 
@@ -46,6 +51,9 @@ class _TDCDataset(Dataset):
             case _:
                 raise ValueError
 
+        self._transform_fn = transform_fn
+        self._target_transform_fn = target_transform_fn
+
         self._xs = self._data[x_columns].apply(tuple, axis=1)
         self._ys = self._data[y_columns].apply(tuple, axis=1)
 
@@ -55,10 +63,16 @@ class _TDCDataset(Dataset):
         if len(x) == 1:
             x = x[0]
 
+        if self._transform_fn is not None:
+            x = self._transform_fn(x)
+
         y = self._ys[index]
 
         if len(y) == 1:
             y = y[0]
+
+        if self._target_transform_fn is not None:
+            y = self._target_transform_fn(y)
 
         return x, y
 
