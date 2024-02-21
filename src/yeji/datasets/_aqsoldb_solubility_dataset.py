@@ -1,16 +1,30 @@
 from pathlib import Path
+from typing import Callable
 
+from ..transforms import Transform
 from .__tdc_dataset import _TDCDataset
 
 
 class AqSolDBSolubilityDataset(_TDCDataset):
-    def __init__(self, root: str | Path, download: bool = False):
+    def __init__(
+        self,
+        root: str | Path,
+        download: bool = False,
+        *,
+        transform_fn: Callable | Transform | None = None,
+        target_transform_fn: Callable | Transform | None = None,
+    ):
         r"""
 
         Parameters
         ----------
-        root
-        download
+        root : str | Path
+
+        download: bool
+
+        transform_fn : Callable | Transform | None
+
+        target_transform_fn : Callable | Transform | None
         """
         super().__init__(
             root=root,

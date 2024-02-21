@@ -326,9 +326,79 @@
             - __getitem__
             - __len__
 
+### ::: yeji.datasets.ZINCDataset
+    options:
+        inherited_members:
+            - __getitem__
+            - __len__
+        members:
+            - __init__
+            - __getitem__
+            - __len__
+
 ## Protein Property
 
 ## Protein Sequence
+
+### ::: yeji.datasets.Uniclust30Dataset
+    options:
+        inherited_members:
+            - __getitem__
+            - __len__
+        members:
+            - __init__
+            - __getitem__
+            - __len__
+
+### ::: yeji.datasets.Uniclust50Dataset
+    options:
+        inherited_members:
+            - __getitem__
+            - __len__
+        members:
+            - __init__
+            - __getitem__
+            - __len__
+
+### ::: yeji.datasets.Uniclust90Dataset
+    options:
+        inherited_members:
+            - __getitem__
+            - __len__
+        members:
+            - __init__
+            - __getitem__
+            - __len__
+
+### ::: yeji.datasets.UniRef50Dataset
+    options:
+        inherited_members:
+            - __getitem__
+            - __len__
+        members:
+            - __init__
+            - __getitem__
+            - __len__
+
+### ::: yeji.datasets.UniRef90Dataset
+    options:
+        inherited_members:
+            - __getitem__
+            - __len__
+        members:
+            - __init__
+            - __getitem__
+            - __len__
+
+### ::: yeji.datasets.UniRef100Dataset
+    options:
+        inherited_members:
+            - __getitem__
+            - __len__
+        members:
+            - __init__
+            - __getitem__
+            - __len__
 
 ## Protein Structure
 
@@ -441,6 +511,28 @@
             - __len__
 
 ## Toxicity
+
+
+### ::: yeji.datasets.Tox21Dataset
+    options:
+        inherited_members:
+            - __getitem__
+            - __len__
+        members:
+            - __init__
+            - __getitem__
+            - __len__
+
+
+### ::: yeji.datasets.ToxCastDataset
+    options:
+        inherited_members:
+            - __getitem__
+            - __len__
+        members:
+            - __init__
+            - __getitem__
+            - __len__
 
 ### ::: yeji.datasets.PDBbindDataset
     options:

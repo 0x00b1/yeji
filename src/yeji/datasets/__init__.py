@@ -58,10 +58,8 @@ from ._random_tait_bryan_angle_dataset import RandomTaitBryanAngleDataset
 from ._real_database_dataset import REALDatabaseDataset
 from ._sabdab_dataset import SAbDabDataset
 from ._skempi_dataset import SKEMPIDataset
-from ._swiss_prot_dataset import SwissProtDataset
 from ._tox21_dataset import Tox21Dataset
 from ._toxcast_dataset import ToxCastDataset
-from ._trembl_dataset import TrEMBLDataset
 from ._uniclust30_dataset import Uniclust30Dataset
 from ._uniclust50_dataset import Uniclust50Dataset
 from ._uniclust90_dataset import Uniclust90Dataset
@@ -86,6 +84,7 @@ from ._veith_cytochrome_p450_3a4_inhibition_dataset import (
 from ._wang_effective_permeability_dataset import (
     WangEffectivePermeabilityDataset,
 )
+from ._zinc_dataset import ZINCDataset
 
 __all__ = [
     "ATOM3DMSPDataset",
@@ -130,10 +129,8 @@ __all__ = [
     "RandomTaitBryanAngleDataset",
     "SAbDabDataset",
     "SKEMPIDataset",
-    "SwissProtDataset",
     "Tox21Dataset",
     "ToxCastDataset",
-    "TrEMBLDataset",
     "UniRef100Dataset",
     "UniRef50Dataset",
     "UniRef90Dataset",
@@ -146,4 +143,5 @@ __all__ = [
     "VeithCytochromeP4502D6InhibitionDataset",
     "VeithCytochromeP4503A4InhibitionDataset",
     "WangEffectivePermeabilityDataset",
+    "ZINCDataset",
 ]
