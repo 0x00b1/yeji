@@ -46,7 +46,7 @@ class _TDCDataset(Dataset):
                 self._data = pandas.read_csv(path)
             case ".pkl":
                 self._data = pandas.read_pickle(path)
-            case ".tsv":
+            case ".tab" | ".tsv":
                 self._data = pandas.read_csv(path, sep="\t")
             case _:
                 raise ValueError

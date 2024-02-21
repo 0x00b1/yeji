@@ -1,12 +1,12 @@
 from pathlib import Path
 from typing import Callable
 
-from torch.utils.data import Dataset
-
 from yeji.transforms import Transform
 
+from .__tdc_dataset import _TDCDataset
 
-class NCATSPAMPAPermeabilityDataset(Dataset):
+
+class NCATSPAMPAPermeabilityDataset(_TDCDataset):
     def __init__(
         self,
         root: str | Path,
@@ -32,10 +32,14 @@ class NCATSPAMPAPermeabilityDataset(Dataset):
         target_transform_fn : Callable | Transform | None
             Transforms the target.
         """
-        raise NotImplementedError
-
-    def __getitem__(self, index: int):
-        raise NotImplementedError
-
-    def __len__(self) -> int:
-        raise NotImplementedError
+        super().__init__(
+            root=root,
+            download=download,
+            identifier=6695857,
+            suffix="approved_pampa_ncats.tab",
+            checksum="2b1f7275a768da97cc01c0187958e2350f40beddc5f20ade0eb6317cdaa2262c",
+            x_columns=["Drug"],
+            y_columns=["Y"],
+            transform_fn=transform_fn,
+            target_transform_fn=target_transform_fn,
+        )
