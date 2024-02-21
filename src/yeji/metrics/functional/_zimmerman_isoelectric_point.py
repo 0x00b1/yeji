@@ -1,4 +1,4 @@
-from typing import Sequence, Union
+from typing import Sequence
 
 from torch import Tensor
 
@@ -8,7 +8,7 @@ from ._protein_property import _protein_property
 
 
 def zimmerman_isoelectric_point(
-    predictions: Union[str, Sequence[str]],
+    predictions: str | Sequence[str],
 ) -> Tensor:
     return _protein_property(
         predictions,

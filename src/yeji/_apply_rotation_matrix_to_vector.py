@@ -6,17 +6,17 @@ def apply_rotation_matrix_to_vector(
     rotation: Tensor,
     inverse: bool | None = False,
 ) -> Tensor:
-    """
-    Apply rotation matrices to a set of vectors.
+    r"""
+    Rotates vectors in three-dimensional space using rotation matrices.
 
-    If the original frame rotates to the final frame by this rotation, then its
-    application to a vector can be seen in two ways:
-
-        1.  As a projection of vector components expressed in the final frame
-            to the original frame.
-        2.  As the physical rotation of a vector being glued to the original
-            frame as it rotates. In this case the vector components are
-            expressed in the original frame before and after the rotation.
+    Note
+    ----
+    This function interprets the rotation of the original frame to the final
+    frame as either a projection, where it maps the components of vectors from
+    the final frame to the original frame, or as a physical rotation,
+    integrating the vectors into the original frame during the rotation
+    process. Consequently, the vector components are maintained in the original
+    frame’s perspective both before and after the rotation.
 
     Parameters
     ----------

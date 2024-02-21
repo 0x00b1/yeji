@@ -12,7 +12,7 @@ def _protein_property_compute(
 
 
 def _protein_property_update(
-    predictions: Union[str, Sequence[str]],
+    predictions: str | Sequence[str],
     index: Dict[str, float],
 ) -> Tensor:
     if isinstance(predictions, str):
@@ -32,7 +32,7 @@ def _protein_property_update(
 
 
 def _protein_property(
-    predictions: Union[str, Sequence[str]],
+    predictions: str | Sequence[str],
     index: Dict[str, float],
 ) -> Tensor:
     scores = _protein_property_update(predictions, index)

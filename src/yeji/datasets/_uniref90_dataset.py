@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Callable, Optional, Union
 
-from ._uni_ref_dataset import UniRefDataset
+from ._uniref_dataset import UniRefDataset
 
 
 class UniRef90Dataset(UniRefDataset):

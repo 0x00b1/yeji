@@ -18,7 +18,7 @@ plugins:
             heading_level: 3
             line_length: 79
             merge_init_into_class: true
-            parameter_headings: false
+            parameter_headings: true
             separate_signature: true
             show_bases: false
             show_root_full_path: false

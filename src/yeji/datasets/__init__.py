@@ -4,6 +4,11 @@ from ._astrazeneca_lipophilicity_dataset import AstraZenecaLipophilicityDataset
 from ._astrazeneca_plasma_protein_binding_rate_dataset import (
     AstraZenecaPlasmaProteinBindingRateDataset,
 )
+from ._atom3d_msp_dataset import ATOM3DMSPDataset
+from ._atom3d_ppi_dataset import ATOM3DPPIDataset
+from ._atom3d_psr_dataset import ATOM3DPSRDataset
+from ._atom3d_res_dataset import ATOM3DRESDataset
+from ._atom3d_smp_dataset import ATOM3DSMPDataset
 from ._bindingdb_dataset import BindingDBDataset
 from ._broccatelli_p_glycoprotein_inhibition_dataset import (
     BroccatelliPGlycoproteinInhibitionDataset,
@@ -52,6 +57,17 @@ from ._random_rotation_vector_dataset import RandomRotationVectorDataset
 from ._random_tait_bryan_angle_dataset import RandomTaitBryanAngleDataset
 from ._real_database_dataset import REALDatabaseDataset
 from ._sabdab_dataset import SAbDabDataset
+from ._skempi_dataset import SKEMPIDataset
+from ._swiss_prot_dataset import SwissProtDataset
+from ._tox21_dataset import Tox21Dataset
+from ._toxcast_dataset import ToxCastDataset
+from ._trembl_dataset import TrEMBLDataset
+from ._uniclust30_dataset import Uniclust30Dataset
+from ._uniclust50_dataset import Uniclust50Dataset
+from ._uniclust90_dataset import Uniclust90Dataset
+from ._uniref50_dataset import UniRef50Dataset
+from ._uniref90_dataset import UniRef90Dataset
+from ._uniref100_dataset import UniRef100Dataset
 from ._veith_cytochrome_p450_1a2_inhibition_dataset import (
     VeithCytochromeP4501A2InhibitionDataset,
 )
@@ -72,6 +88,11 @@ from ._wang_effective_permeability_dataset import (
 )
 
 __all__ = [
+    "ATOM3DMSPDataset",
+    "ATOM3DPPIDataset",
+    "ATOM3DPSRDataset",
+    "ATOM3DRESDataset",
+    "ATOM3DSMPDataset",
     "AqSolDBSolubilityDataset",
     "AstraZenecaClearanceDataset",
     "AstraZenecaLipophilicityDataset",
@@ -108,6 +129,17 @@ __all__ = [
     "RandomRotationVectorDataset",
     "RandomTaitBryanAngleDataset",
     "SAbDabDataset",
+    "SKEMPIDataset",
+    "SwissProtDataset",
+    "Tox21Dataset",
+    "ToxCastDataset",
+    "TrEMBLDataset",
+    "UniRef100Dataset",
+    "UniRef50Dataset",
+    "UniRef90Dataset",
+    "Uniclust30Dataset",
+    "Uniclust50Dataset",
+    "Uniclust90Dataset",
     "VeithCytochromeP4501A2InhibitionDataset",
     "VeithCytochromeP4502C19InhibitionDataset",
     "VeithCytochromeP4502C9InhibitionDataset",

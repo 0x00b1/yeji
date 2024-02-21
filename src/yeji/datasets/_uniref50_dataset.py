@@ -1,10 +1,10 @@
 from pathlib import Path
 from typing import Callable, Optional, Union
 
-from ._uni_ref_dataset import UniRefDataset
+from ._uniref_dataset import UniRefDataset
 
 
-class UniRef100Dataset(UniRefDataset):
+class UniRef50Dataset(UniRefDataset):
     def __init__(
         self,
         root: Union[str, Path],
@@ -34,10 +34,10 @@ class UniRef100Dataset(UniRefDataset):
         """
         super().__init__(
             root,
-            "uniref100",
+            "uniref50",
             (
-                "",
-                "",
+                "2b05bd43c14ce0bc0591a017efa648e6",  # uniref50.fasta
+                "cb28f2fc41694ccc009cbbab3e08db98",  # uniref50.fasta.gz
             ),
             cache_sequence_indicies=cache_sequence_indicies,
             download=download,
