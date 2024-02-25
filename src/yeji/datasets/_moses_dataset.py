@@ -1,19 +1,18 @@
 from pathlib import Path
 from typing import Callable
 
-from torch.utils.data import Dataset
-
 from yeji.transforms import Transform
 
+from .__tdc_dataset import _TDCDataset
 
-class MOSESDataset(Dataset):
+
+class MOSESDataset(_TDCDataset):
     def __init__(
         self,
         root: str | Path,
         *,
         download: bool = False,
         transform_fn: Callable | Transform | None = None,
-        target_transform_fn: Callable | Transform | None = None,
     ):
         r"""
 
@@ -28,14 +27,13 @@ class MOSESDataset(Dataset):
 
         transform_fn : Callable | Transform | None
             Transforms the input.
-
-        target_transform_fn : Callable | Transform | None
-            Transforms the target.
         """
-        raise NotImplementedError
-
-    def __getitem__(self, index: int):
-        raise NotImplementedError
-
-    def __len__(self) -> int:
-        raise NotImplementedError
+        super().__init__(
+            root=root,
+            download=download,
+            identifier=4170962,
+            suffix="moses.tab",
+            checksum="0771d24e56f1b281ec4b0cdb1c85bab2b74ee9f34c7424d2b4432aa4a593d4c2",
+            x_columns=["smiles"],
+            transform_fn=transform_fn,
+        )

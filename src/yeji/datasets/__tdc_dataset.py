@@ -18,7 +18,7 @@ class _TDCDataset(Dataset):
         suffix: str,
         checksum: str,
         x_columns: list[str],
-        y_columns: list[str],
+        y_columns: list[str] | None = None,
         transform_fn: Callable | Transform | None = None,
         target_transform_fn: Callable | Transform | None = None,
     ):
@@ -51,11 +51,16 @@ class _TDCDataset(Dataset):
             case _:
                 raise ValueError
 
+        self._columns = x_columns
+        self._target_columns = y_columns
+
         self._transform_fn = transform_fn
         self._target_transform_fn = target_transform_fn
 
-        self._xs = self._data[x_columns].apply(tuple, axis=1)
-        self._ys = self._data[y_columns].apply(tuple, axis=1)
+        self._xs = self._data[self._columns].apply(tuple, axis=1)
+
+        if self._target_columns is not None:
+            self._ys = self._data[self._target_columns].apply(tuple, axis=1)
 
     def __getitem__(self, index: int):
         x = self._xs[index]
@@ -65,6 +70,9 @@ class _TDCDataset(Dataset):
 
         if self._transform_fn is not None:
             x = self._transform_fn(x)
+
+        if self._target_columns is None:
+            return x
 
         y = self._ys[index]
 
