@@ -61,6 +61,7 @@ from ._rotation_vector_to_rotation_quaternion import (
 from ._rotation_vector_to_tait_bryan_angle import (
     rotation_vector_to_tait_bryan_angle,
 )
+from ._slerp import slerp
 from ._tait_bryan_angle_identity import tait_bryan_angle_identity
 from ._tait_bryan_angle_magnitude import tait_bryan_angle_magnitude
 from ._tait_bryan_angle_to_euler_angle import tait_bryan_angle_to_euler_angle
@@ -114,6 +115,7 @@ __all__ = [
     "rotation_vector_to_rotation_matrix",
     "rotation_vector_to_rotation_quaternion",
     "rotation_vector_to_tait_bryan_angle",
+    "slerp",
     "tait_bryan_angle_identity",
     "tait_bryan_angle_magnitude",
     "tait_bryan_angle_to_euler_angle",

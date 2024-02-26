@@ -43,6 +43,7 @@ General-purpose PyTorch operators.
 ### ::: yeji.rotation_vector_to_rotation_matrix
 ### ::: yeji.rotation_vector_to_rotation_quaternion
 ### ::: yeji.rotation_vector_to_tait_bryan_angle
+### ::: yeji.slerp
 ### ::: yeji.tait_bryan_angle_identity
 ### ::: yeji.tait_bryan_angle_magnitude
 ### ::: yeji.tait_bryan_angle_to_euler_angle
