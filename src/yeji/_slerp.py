@@ -12,6 +12,7 @@ def slerp(
 ) -> Tensor:
     """
     Interpolate between two or more points on a sphere.
+
     Unlike linear interpolation, which can result in changes in speed when
     interpolating between orientations or positions on a sphere, spherical
     linear interpolation ensures that the interpolation occurs at a constant
@@ -19,24 +20,31 @@ def slerp(
     The process is useful for rotations and orientation interpolation in
     three-dimensional spaces, smoothly transitioning between different
     orientations.
+
     Mathematically, spherical linear interpolation interpolates between two
     points on a sphere using a parameter $t$, where $t = 0$ represents the
     start point and $t = n$ represents the end point. For two rotation
-    quaternions $q_{1}$ and $q_{2{$ representing the start and end
+    quaternions $q_{1}$ and $q_{2}$ representing the start and end
     orientations:
-    $$\text{slerp}(q_{1}, q_{2}; t) = \frac{\sin((1 - t)\theta)}{\sin(\theta)}q_{1} + \frac{\sin(t\theta)}{\sin(\theta)}q_{2}$$
-    where $\theta$ is the angle between $q_{1}$ and $q_{2}$, and is computed
+
+    $$\\text{slerp}(q_{1}, q_{2}; t) = q_{1}\\frac{\\sin((1 - t)\\theta)}{\\sin(\\theta)} + q_{2}\\frac{\\sin(t\\theta)}{\\sin(\\theta)}$$
+
+    where $\\theta$ is the angle between $q_{1}$ and $q_{2}$, and is computed
     using the dot product of $q_{1}$ and $q_{2}$. This formula ensures that the
     interpolation moves along the shortest path on the four-dimensional sphere
     of rotation quaternions, resulting in a smooth and constant-speed rotation.
+
     Parameters
     ----------
     input : Tensor, shape (..., N)
         Times.
+
     time : Tensor, shape (..., N)
         Times of the known rotations. At least 2 times must be specified.
+
     rotation : Tensor, shape (..., N, 4)
         Rotation quaternions. Rotation quaternions are normalized to unit norm.
+
     out : Tensor
         Output.
     """
