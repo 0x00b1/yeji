@@ -10,7 +10,7 @@ def slerp(
     *,
     out: Tensor | None = None,
 ) -> Tensor:
-    """
+    r"""
     Interpolate between two or more points on a sphere.
 
     Unlike linear interpolation, which can result in changes in speed when
@@ -27,9 +27,9 @@ def slerp(
     quaternions $q_{1}$ and $q_{2}$ representing the start and end
     orientations:
 
-    $$\\text{slerp}(q_{1}, q_{2}; t) = q_{1}\\frac{\\sin((1 - t)\\theta)}{\\sin(\\theta)} + q_{2}\\frac{\\sin(t\\theta)}{\\sin(\\theta)}$$
+    $$\text{slerp}(q_{1}, q_{2}; t) = q_{1}\frac{\sin((1 - t)\theta)}{\sin(\theta)} + q_{2}\frac{\sin(t\theta)}{\sin(\theta)}$$
 
-    where $\\theta$ is the angle between $q_{1}$ and $q_{2}$, and is computed
+    where $\theta$ is the angle between $q_{1}$ and $q_{2}$, and is computed
     using the dot product of $q_{1}$ and $q_{2}$. This formula ensures that the
     interpolation moves along the shortest path on the four-dimensional sphere
     of rotation quaternions, resulting in a smooth and constant-speed rotation.
