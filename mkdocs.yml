@@ -48,7 +48,6 @@ nav:
     - "package_reference/yeji.datasets.md"
     - "package_reference/yeji.features.md"
     - "package_reference/yeji.func.md"
-    - "package_reference/yeji.lightning.md"
     - "package_reference/yeji.lightning.datamodules.md"
     - "package_reference/yeji.metrics.md"
     - "package_reference/yeji.metrics.functional.md"
