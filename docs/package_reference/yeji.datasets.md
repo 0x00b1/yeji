@@ -661,4 +661,3 @@ Rotation modeling is the computational technique used to analyze and predict the
             - __init__
             - __getitem__
             - __len__
-
