@@ -109,3 +109,5 @@ PyTorch operators.
 ### ::: yeji.tait_bryan_angle_magnitude
 
 ## Sequence Alignment
+
+### ::: yeji.smith_waterman

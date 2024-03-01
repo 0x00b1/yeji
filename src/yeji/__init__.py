@@ -117,11 +117,11 @@ __all__ = [
     "rotation_vector_to_rotation_quaternion",
     "rotation_vector_to_tait_bryan_angle",
     "slerp",
+    "smith_waterman",
     "tait_bryan_angle_identity",
     "tait_bryan_angle_magnitude",
     "tait_bryan_angle_to_euler_angle",
     "tait_bryan_angle_to_rotation_matrix",
     "tait_bryan_angle_to_rotation_quaternion",
     "tait_bryan_angle_to_rotation_vector",
-    "smith_waterman",
 ]
