@@ -1,24 +1,25 @@
 import torch
 import torch.nn.functional
-from torch import Tensor
+from torch import LongTensor
 
 
 def graft(
-    input: Tensor,
-    mask: Tensor,
-    template: Tensor,
+    input: LongTensor,
+    mask: LongTensor,
+    template: LongTensor,
     mixed: bool = False,
-) -> Tensor:
+    num_classes: int = -1,
+) -> LongTensor:
     """
     Parameters:
     -----------
-    input : Tensor, (..., L, 20)
+    input : Tensor, shape=[..., L]
         Sequences.
 
-    mask : Tensor, (..., L)
+    mask : Tensor, shape=[L]
         Whether to draw sequence columns from the input or from the template.
 
-    template : Tensor, (T, L, 20)
+    template : Tensor, shape=[T, L]
         Library of template sequences that may be grafted with the `input`
         sequence. Zero columns are not covered by the template.
 
@@ -32,15 +33,35 @@ def graft(
     grafted_sequence : Tensor, (..., T, L, 20)
         Grafted sequences.
     """
-    if mixed:
-        raise NotImplementedError("I'm not sure how to do this part")
 
-    def fn(input: Tensor, mask: Tensor, template: Tensor) -> Tensor:
-        mask = mask.unsqueeze(-1)
+    def fn(input: LongTensor, mask: LongTensor, template: LongTensor):
+        input = torch.nn.functional.one_hot(input, num_classes=num_classes)
 
-        return input * mask + template * (1 - mask)
+        template = torch.nn.functional.one_hot(
+            template, num_classes=num_classes
+        )
 
-    return torch.func.vmap(fn, in_dims=0)(input, mask, template)
+        if mixed:
+            raise NotImplementedError()
+        else:
+            return torch.argmax(
+                torch.subtract(
+                    torch.multiply(
+                        input,
+                        torch.unsqueeze(mask, -1),
+                    ),
+                    torch.multiply(
+                        template,
+                        torch.subtract(
+                            torch.unsqueeze(mask, -1),
+                            1,
+                        ),
+                    ),
+                ),
+                dim=-1,
+            )
+
+    return torch.func.vmap(fn, in_dims=(0, None, None))(input, mask, template)
 
 
 def test_graft():
