@@ -14,6 +14,6 @@ jobs:
       - run: python -m pytest
       - env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
 name: Test
 on: [ pull_request, push ]
